@@ -1,20 +1,31 @@
 package com.cheng.bean;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-
 /**
  * 广告模块实体类
  * Created by cheng on 2017/7/22.
  */
-@JsonInclude(Include.NON_NULL)
 public class Ad {
 
+    /**
+     * 主键
+     */
     private Long id;
+    /**
+     * 标题
+     */
     private String title;
+    /**
+     * 图片文件名
+     */
     private String imgFileName;
+    /**
+     * 链接地址
+     */
     private String link;
-    private Long weigth;
+    /**
+     * 权重
+     */
+    private Long weight;
 
     public Long getId() {
         return id;
@@ -48,11 +59,11 @@ public class Ad {
         this.link = link;
     }
 
-    public Long getWeigth() {
-        return weigth;
+    public Long getWeight() {
+        return weight;
     }
 
-    public void setWeigth(Long weigth) {
-        this.weigth = weigth;
+    public void setWeight(Long weight) {
+        this.weight = weight;
     }
 }

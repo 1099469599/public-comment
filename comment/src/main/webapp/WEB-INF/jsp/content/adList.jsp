@@ -28,7 +28,7 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <input class="tabSub" value="添加" onclick="location.href='${basePath}/ad/addinit'"
                                type="button"/>
-                    </td>w
+                    </td>
                 </tr>
                 </tbody>
             </table>

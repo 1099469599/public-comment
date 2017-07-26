@@ -11,9 +11,6 @@
             http://mybatis.org/schema/mybatis-spring
             http://mybatis.org/schema/mybatis-spring-1.2.xsd ">
 
-    <!-- 配置数据库相关参数properties的属性：${url} -->
-    <context:property-placeholder location="classpath:properties/jdbc.properties"/>
-
     <!-- 配置数据源 -->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
         <!-- 配置数据库用户名 -->
@@ -58,14 +55,13 @@
         <!-- 扫描java bean，自动使用别名 -->
         <property name="typeAliasesPackage" value="com.cheng.bean"/>
         <!-- 扫描mybatis的SQL配置文件 -->
-        <!--<property name="mapperLocations" value="classpath:mapper/*.xml"/>-->
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
     </bean>
-
-    <!-- 开启spring注解扫描 -->
-    <context:component-scan base-package="com.cheng.dao"/>
 
     <!-- 扫描Dao接口包，动态实现Dao接口，注入到spring容器中（新写法） -->
     <mybatis-spring:scan base-package="com.cheng.dao"/>
+    <!-- 开启spring注解扫描 -->
+    <context:component-scan base-package="com.cheng.dao.impl"/>
 
     <!--
     老式写法

@@ -17,7 +17,6 @@
 <body>
 <!-- 蒙版DIV -->
 <div id="mengban" style="display:none"></div>
-
 <div class="wishlistBox" style="display: none;left:550px;top:200px;">
     <div class="personRigTop persongBgimg" style="height:200px;width:480px;">
         <div class="persongRightTit" style="width:480px;">&nbsp;&nbsp;修改密码</div>
@@ -50,8 +49,8 @@
                         <td class="left"></td>
                         <td class="submit">
                             <input id="submitVal" class="tabSub" value="提交"
-                                   onclick="checkForm('http://127.0.0.1:8081/comment');" type="button"/>
-                            <input class="tabSub" value="关闭" onclick="closeDiv();" type="reset"/>
+                                   onclick="" type="button"/>
+                            <input class="tabSub" value="关闭" onclick="" type="reset"/>
                         </td>
                     </tr>
                     </tbody>
@@ -64,13 +63,13 @@
 <form method="post">
     <div id="header">
         <div class="iheader">
-            <div class="logo"><a href="#"><img src="" alt="" height="88px" width="99px"/></a></div>
+            <%--<div class="logo"><a href="#"><img src="" alt="" height="88px" width="99px"/></a></div>--%>
             <div style="height: 44px;">
-                <div class="wuxianlogo"><img src="" alt="" height="28px" width="275px"/></div>
+                <%--<div class="wuxianlogo"><img src="" alt="" height="28px" width="275px"/></div>--%>
                 <div class="h_info">
                     <span class="line"></span>
                     欢迎您！姓名[账号]&nbsp; 当前时间：2017年03月20日&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="javascript:void(0);" onclick="openAddDiv();">[修改密码]</a>
+                    <a href="javascript:void(0);" onclick="">[修改密码]</a>
                     &nbsp;
                     <a href="javascript:void(0);" onclick="if(confirm('您确认退出系统?')){};">[退出系统]</a>
                 </div>
