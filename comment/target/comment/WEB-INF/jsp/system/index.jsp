@@ -86,7 +86,7 @@
             <tr>
                 <td class="leftTd" style="vertical-align:top" width="150">
                     <div class="left">
-                        <div class="ileft" id="menuDiv">
+                        <div class="left" id="menuDiv">
                             <h3 onclick="clickSecondMenu(this,'${basePath}/ad');"><a>广告管理</a></h3>
                         </div>
                     </div>

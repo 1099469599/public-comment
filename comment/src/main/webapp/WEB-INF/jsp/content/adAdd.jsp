@@ -12,11 +12,13 @@
     <link rel="stylesheet" type="text/css" href="${basePath}/css/main.css"/>
 
     <script type="text/javascript" src="${basePath}/js/common/jquery-1.8.3.js"></script>
+    <script type="text/javascript" src="${basePath}/js/common/common.js"></script>
     <script type="text/javascript" src="${basePath}/js/content/adAdd.js"></script>
 </head>
 <body style="background: #e1e9eb;">
 <%--上传图片 所以加multipart/form-data--%>
 <form id="mainForm" method="post" action="${basePath}/ad/add" enctype="multipart/form-data">
+    <input type="hidden" id="message" value="${pageCode.msg}"/>
     <div class="right">
         <div class="current">当前位置：<a href="###">内容管理</a> &gt; 广告管理</div>
         <div class="rightCont">

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CustomBeanRegistry">
+    <option name="map">
+      <map>
+        <entry key="&lt;mybatis-spring:scan xmlns:mybatis-spring=&quot;http://mybatis.org/schema/mybatis-spring&quot; base-package=&quot;com.cheng.dao&quot; /&gt;">
+          <value>
+            <list>
+              <CustomBeanInfo>
+                <option name="beanName" value="adDao" />
+                <option name="beanClassName" value="com.cheng.dao.AdDao" />
+              </CustomBeanInfo>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

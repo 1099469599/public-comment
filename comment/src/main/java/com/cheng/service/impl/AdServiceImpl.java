@@ -4,11 +4,15 @@ import com.cheng.bean.Ad;
 import com.cheng.dao.impl.AdDaoImpl;
 import com.cheng.dto.AdDto;
 import com.cheng.service.AdService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 广告模块service实现类
@@ -23,7 +27,11 @@ public class AdServiceImpl implements AdService {
     @Value("${adImage.savePath}")
     private String adImageSavePath;
 
+    @Value("${adImage.url}")
+    private String adImageUrl;
+
     @Override
+    //TODO 可以改成获取失败的详细信息
     public boolean add(AdDto adDto) {
         Ad ad = new Ad();
         ad.setTitle(adDto.getTitle());
@@ -43,10 +51,31 @@ public class AdServiceImpl implements AdService {
                 adDao.insert(ad);
                 return true;
             } catch (Exception e) {
+                //TODO 需要添加日志
                 return false;
             }
         } else {
             return false;
         }
+    }
+
+    public List<AdDto> searchByPage(AdDto adDto) {
+        List<AdDto> result = new ArrayList<AdDto>();
+        Ad condition = new Ad();
+        BeanUtils.copyProperties(adDto, condition);
+        List<Ad> adList = adDao.selectByPage(condition);
+        for (Ad ad : adList) {
+            AdDto addtoTemp = new AdDto();
+            addtoTemp.setImg(adImageUrl + ad.getImgFileName());
+            BeanUtils.copyProperties(ad, addtoTemp);
+            result.add(addtoTemp);
+        }
+        return result;
+    }
+
+    //TODO 事务
+    @Override
+    public boolean remove(Long id) {
+        return adDao.delete(id);
     }
 }

@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cheng.dao.AdDao">
-    <insert id="insert">
-        INSERT INTO aD(title,img_file_name,link,weight)
+
+    <insert id="insert" parameterType="ad">
+        INSERT INTO ad(title,img_file_name,link,weight)
         VALUE (#{title},#{imgFileName},#{link},#{weight})
     </insert>
+
+    <select id="selectByPage" parameterType="ad" resultType="ad">
+        SELECT id,title,img_file_name,link,weight FROM ad
+        <where>
+            <if test="title!=null and title!=''">
+                title LIKE CONCAT('%',#{title},'%')
+            </if>
+        </where>
+        ORDER BY weight DESC,id
+    </select>
+    <delete id="delete" parameterType="Long">
+        DELETE FROM ad WHERE id=#{id}
+    </delete>
 </mapper>

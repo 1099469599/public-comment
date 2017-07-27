@@ -11,7 +11,10 @@
             http://mybatis.org/schema/mybatis-spring
             http://mybatis.org/schema/mybatis-spring-1.2.xsd ">
 
-    <!-- 配置数据源 -->
+    <!--
+        配置数据源
+        destroy-method="close"  意思是当数据库连接不使用的时候,就把该连接重新放到数据池中,方便下次使用调用
+     -->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
         <!-- 配置数据库用户名 -->
         <property name="user" value="${jdbc.user}"/>
@@ -21,7 +24,7 @@
         <property name="jdbcUrl" value="${jdbc.jdbcUrl}"/>
         <!-- 配置jdbc驱动 -->
         <property name="driverClass" value="${jdbc.driverClass}"/>
-        <!-- 每60秒检查所有的连接池中的空闲连接 -->
+        <!-- 每60秒检查所有的连接池中的空闲连接。Default：0 -->
         <property name="idleConnectionTestPeriod" value="60"/>
         <!-- 初始化时获得五个连接，取值应在minPoolSize与maxPoolSize之间。Default：3 -->
         <property name="initialPoolSize" value="5"/>
@@ -31,11 +34,16 @@
         <property name="maxPoolSize" value="10"/>
         <!-- 连接池中保留的最小连接数 -->
         <property name="minPoolSize" value="5"/>
-        <!-- JDBC的标准参数，用以控制数据源内加载PreparedStatements数量。-->
+        <!--
+            JDBC的标准参数，用以控制数据源内加载PreparedStatements数量。
+            但由于预缓存的statements属于单个connect而不是整个连接池。所以设置这个参数需要考虑多方面的因素。
+            如果maxStatements与maxStatementsPerConnection均为0，则缓存被关闭。Default：0
+        -->
         <property name="maxStatements" value="100"/>
-        <!-- maxStatementsPerConnection定义了连接池内单个连接所拥有的最大缓存statements数。 -->
+        <!-- maxStatementsPerConnection定义了连接池内单个连接所拥有的最大缓存statements数。Default:0 -->
         <property name="maxStatementsPerConnection" value="3"/>
-        <!--  -->
+        <!-- 定义所有连接测试都执行的测试语句。在使用连接测试的情况下这个显著提高测试速度。
+          注意：测试的表必须在初始数据源的时候就存在。Default：null-->
         <property name="preferredTestQuery" value="select 1"/>
         <!-- 定义在从数据库获取新连接失败后重复尝试的次数。Default：30 -->
         <property name="acquireRetryAttempts" value="3"/>

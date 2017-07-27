@@ -1,10 +1,14 @@
 package com.cheng.bean;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 /**
- * 广告模块实体类
+ * 广告表实体类
  * Created by cheng on 2017/7/22.
  */
-public class Ad {
+@JsonInclude(Include.NON_NULL)
+public class Ad extends BaseBean{
 
     /**
      * 主键
