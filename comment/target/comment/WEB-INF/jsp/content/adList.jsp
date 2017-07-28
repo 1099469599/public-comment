@@ -20,9 +20,9 @@
 <form action="${basePath}/ad/search" id="mainForm" method="post">
     <input type="hidden" id="id" name="id"/>
     <input type="hidden" id="message" name="${pageCode.msg}"/>
-    <input type="hidden" id="basePath" name="${basePath}"/>
+    <input type="hidden" id="basePath" value="${basePath}"/>
     <input type="hidden" id="pageNum" name="page.pageNum"/>
-    <input type="hidden" name="page.pageSize" value="${pageInfo.pageSize}">
+    <%--<input type="hidden" name="page.pageSize" value="${pageInfo.pageSize}">--%>
     <div class="right">
         <div class="current">当前位置：<a href="#">内容管理</a> &gt; 广告管理</div>
         <div class="rightCont">
@@ -62,7 +62,7 @@
                                     <%-- TODO 修改删除 --%>
                                 <a href="javascript:void(0);" onclick="modifyInit('${item.id}');">修改</a>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
-                                <a href="javascript:void(0);" onclick="remove('${item.id}');">删除</a>
+                                <a href="javascript:void(0);" onclick="removeAd('${item.id}');">删除</a>
                             </td>
                         </tr>
                     </c:forEach>

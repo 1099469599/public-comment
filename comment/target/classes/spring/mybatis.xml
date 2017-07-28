@@ -23,7 +23,7 @@
             <property name="helperDialect" value="mysql"/>
             <!-- 分页合理化参数，当参数为true时，pageNum<0时会查第一页，
                 pageNum>pages（总页数）时会查最后一页。默认为false，直接根据参数查询 -->
-            <property name="reasonable" value="true "/>
+            <property name="reasonable" value="true"/>
         </plugin>
     </plugins>
 </configuration>

@@ -1,6 +1,8 @@
 package com.cheng.service;
 
+import com.cheng.bean.Ad;
 import com.cheng.dto.AdDto;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
@@ -24,10 +26,11 @@ public interface AdService {
      * @param adDto 查询条件(包含分页对象)
      * @return 广告列表
      */
-    List<AdDto> searchByPage(AdDto adDto);
+    PageInfo<Ad> searchByPage(AdDto adDto);
 
     /**
      * 删除广告
+     *
      * @param id
      * @return
      */

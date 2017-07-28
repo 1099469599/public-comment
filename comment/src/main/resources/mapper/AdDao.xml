@@ -18,6 +18,7 @@
         </where>
         ORDER BY weight DESC,id
     </select>
+
     <delete id="delete" parameterType="Long">
         DELETE FROM ad WHERE id=#{id}
     </delete>

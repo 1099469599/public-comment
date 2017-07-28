@@ -26,9 +26,7 @@ public class AdDaoImpl implements AdDao {
 
     @Override
     public List<Ad> selectByPage(Ad ad) {
-        System.out.println(ad.getPage().getPageNum()+"--"+ad.getPage().getPageSize());
         PageHelper.startPage(ad.getPage().getPageNum(), ad.getPage().getPageSize());
-
         return adDao.selectByPage(ad);
     }
 

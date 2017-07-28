@@ -17,16 +17,20 @@ function search(pageNum) {
 }
 
 /**
- * 删除
+ * 删除广告
  */
-function remove() {
-    alert(123);
-
+function removeAd(id) {
+    if (confirm("确定要删除这条广告吗? ")){
+        $("#id").val(id);
+        $("#mainForm").attr("action",$("#basePath").val()+"/ad/remove");
+        $("#mainForm").submit();
+    }
 }
 
 /**
  * 初始化修改页
  */
 function modifyInit() {
+    //TODO
     alert(123);
 }

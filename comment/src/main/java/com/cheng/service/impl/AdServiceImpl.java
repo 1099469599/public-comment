@@ -4,6 +4,7 @@ import com.cheng.bean.Ad;
 import com.cheng.dao.impl.AdDaoImpl;
 import com.cheng.dto.AdDto;
 import com.cheng.service.AdService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -59,18 +60,20 @@ public class AdServiceImpl implements AdService {
         }
     }
 
-    public List<AdDto> searchByPage(AdDto adDto) {
+    public PageInfo<Ad> searchByPage(AdDto adDto) {
         List<AdDto> result = new ArrayList<AdDto>();
         Ad condition = new Ad();
         BeanUtils.copyProperties(adDto, condition);
         List<Ad> adList = adDao.selectByPage(condition);
+        //用PageInfo对结果进行包装
+        PageInfo<Ad> pageInfo = new PageInfo<>(adList);
         for (Ad ad : adList) {
             AdDto addtoTemp = new AdDto();
             addtoTemp.setImg(adImageUrl + ad.getImgFileName());
             BeanUtils.copyProperties(ad, addtoTemp);
             result.add(addtoTemp);
         }
-        return result;
+        return pageInfo;
     }
 
     //TODO 事务

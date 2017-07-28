@@ -1,5 +1,6 @@
 package com.cheng.controller.content;
 
+import com.cheng.bean.Ad;
 import com.cheng.constant.PageCodeEnum;
 import com.cheng.dto.AdDto;
 import com.cheng.service.impl.AdServiceImpl;
@@ -34,9 +35,7 @@ public class AdController {
      */
     @RequestMapping
     public String initList(Model model) {
-        List<AdDto> adList = adService.searchByPage(new AdDto());
-        //用PageInfo对结果进行包装
-        PageInfo<AdDto> pageInfo = new PageInfo<AdDto>(adList);
+        PageInfo<Ad> pageInfo = adService.searchByPage(new AdDto());
         model.addAttribute("pageInfo", pageInfo);
         return "/content/adList";
     }
@@ -46,10 +45,7 @@ public class AdController {
      */
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public String search(Model model, AdDto adDto) {
-        System.out.println(adDto.getPage().getPageNum()+"--"+adDto.getPage().getPageSize());
-        List<AdDto> adList = adService.searchByPage(adDto);
-        //用PageInfo对结果进行包装
-        PageInfo<AdDto> pageInfo = new PageInfo<AdDto>(adList);
+        PageInfo<Ad> pageInfo = adService.searchByPage(adDto);
         model.addAttribute("pageInfo", pageInfo);
         return "/content/adList";
     }
@@ -86,6 +82,6 @@ public class AdController {
         } else {
             model.addAttribute(PageCodeEnum.KEY, PageCodeEnum.REMOVE_FAIL);
         }
-        return "forword:/ad";
+        return "forward:/ad";
     }
 }
