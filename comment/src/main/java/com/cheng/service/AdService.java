@@ -32,7 +32,23 @@ public interface AdService {
      * 删除广告
      *
      * @param id
-     * @return
+     * @return 是否删除成功：true-删除成功;false-删除失败
      */
     boolean remove(Long id);
+
+    /**
+     * 根据主键获取广告的Dto对象
+     *
+     * @param id 广告表主键值
+     * @return adDto对象
+     */
+    AdDto getById(Long id);
+
+    /**
+     * 根据主键修改广告的dto对象
+     *
+     * @param adDto 广告dto对象
+     * @return 是否修改成功：true-修改成功;fals-修改失败
+     */
+    boolean modify(AdDto adDto);
 }

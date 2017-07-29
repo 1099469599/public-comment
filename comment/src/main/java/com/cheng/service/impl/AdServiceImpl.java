@@ -4,6 +4,7 @@ import com.cheng.bean.Ad;
 import com.cheng.dao.impl.AdDaoImpl;
 import com.cheng.dto.AdDto;
 import com.cheng.service.AdService;
+import com.cheng.util.FileUtil;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,6 +62,7 @@ public class AdServiceImpl implements AdService {
         }
     }
 
+    @Override
     public PageInfo<Ad> searchByPage(AdDto adDto) {
         List<AdDto> result = new ArrayList<AdDto>();
         Ad condition = new Ad();
@@ -80,5 +83,37 @@ public class AdServiceImpl implements AdService {
     @Override
     public boolean remove(Long id) {
         return adDao.delete(id);
+    }
+
+    @Override
+    public AdDto getById(Long id) {
+        Ad ad = adDao.selectById(id);
+        AdDto adDto = new AdDto();
+        BeanUtils.copyProperties(ad, adDto);
+        adDto.setImg(adImageUrl + ad.getImgFileName());
+        return adDto;
+    }
+
+    @Override
+    public boolean modify(AdDto adDto) {
+        Ad ad = new Ad();
+        BeanUtils.copyProperties(adDto, ad);
+        String fileName = null;
+        if (adDto.getImgFile() != null && adDto.getImgFile().getSize() > 0) {
+            try {
+                fileName = FileUtil.save(adDto.getImgFile(), adImageSavePath);
+                ad.setImgFileName(fileName);
+            } catch (IOException e) {
+                return false;
+            }
+        }
+        int updateCount = adDao.update(ad);
+        if (updateCount != 1) {
+            return false;
+        }
+        if (fileName != null) {
+            FileUtil.delete(adImageSavePath + ad.getImgFileName());
+        }
+        return true;
     }
 }

@@ -6,6 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <%-- 解决IE兼容模式 --%>
     <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE"/>
     <title>广告列表</title>
     <link rel="stylesheet" type="text/css" href="${basePath}/css/all.css"/>
@@ -22,7 +23,6 @@
     <input type="hidden" id="message" name="${pageCode.msg}"/>
     <input type="hidden" id="basePath" value="${basePath}"/>
     <input type="hidden" id="pageNum" name="page.pageNum"/>
-    <%--<input type="hidden" name="page.pageSize" value="${pageInfo.pageSize}">--%>
     <div class="right">
         <div class="current">当前位置：<a href="#">内容管理</a> &gt; 广告管理</div>
         <div class="rightCont">
@@ -38,7 +38,7 @@
                     <td style="text-align: right;" width="150">
                         <input class="tabSub" value="查询" onclick="search('1');" type="button"/>
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <input class="tabSub" value="添加" onclick="location.href='${basePath}/ad/addinit'"
+                        <input class="tabSub" value="添加" onclick="location.href='${basePath}/ad/addInit'"
                                type="button"/>
                     </td>
                 </tr>
@@ -59,7 +59,6 @@
                             <td>${item.title}</td>
                             <td>${item.link}</td>
                             <td>
-                                    <%-- TODO 修改删除 --%>
                                 <a href="javascript:void(0);" onclick="modifyInit('${item.id}');">修改</a>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                 <a href="javascript:void(0);" onclick="removeAd('${item.id}');">删除</a>

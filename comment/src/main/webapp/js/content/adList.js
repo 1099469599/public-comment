@@ -7,7 +7,6 @@ $(function () {
     common.showMessage($("#message").val());
 });
 
-
 /**
  * 分页查找
  */
@@ -20,9 +19,9 @@ function search(pageNum) {
  * 删除广告
  */
 function removeAd(id) {
-    if (confirm("确定要删除这条广告吗? ")){
+    if (confirm("确定要删除这条广告吗? ")) {
         $("#id").val(id);
-        $("#mainForm").attr("action",$("#basePath").val()+"/ad/remove");
+        $("#mainForm").attr("action", $("#basePath").val() + "/ad/remove");
         $("#mainForm").submit();
     }
 }
@@ -30,7 +29,9 @@ function removeAd(id) {
 /**
  * 初始化修改页
  */
-function modifyInit() {
-    //TODO
-    alert(123);
+function modifyInit(id) {
+    $("#id").val(id);
+    $("#mainForm").attr("action", $("#basePath").val() + "/ad/modifyInit");
+    $("#mainForm").submit();
 }
+

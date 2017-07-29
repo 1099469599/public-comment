@@ -19,7 +19,31 @@
         ORDER BY weight DESC,id
     </select>
 
+    <select id="selectById" parameterType="Long" resultType="ad">
+        select id,title,img_file_name,link,weight FROM ad
+        WHERE  id=#{id}
+    </select>
+
     <delete id="delete" parameterType="Long">
         DELETE FROM ad WHERE id=#{id}
     </delete>
+
+    <update id="update" parameterType="ad">
+        UPDATE ad
+        <set>
+            <if test="title != null">
+                title = #{title},
+            </if>
+            <if test="imgFileName != null">
+                img_file_name = #{imgFileName},
+            </if>
+            <if test="link != null">
+                link = #{link},
+            </if>
+            <if test="weight != null">
+                weight = #{weight},
+            </if>
+        </set>
+        WHERE id=#{id}
+    </update>
 </mapper>

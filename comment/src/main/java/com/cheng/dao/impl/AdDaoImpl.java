@@ -34,4 +34,14 @@ public class AdDaoImpl implements AdDao {
     public boolean delete(Long id) {
         return adDao.delete(id);
     }
+
+    @Override
+    public Ad selectById(Long id) {
+        return adDao.selectById(id);
+    }
+
+    @Override
+    public int update(Ad ad) {
+        return adDao.update(ad);
+    }
 }

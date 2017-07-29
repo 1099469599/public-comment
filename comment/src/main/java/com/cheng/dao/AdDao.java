@@ -34,4 +34,20 @@ public interface AdDao {
      * @return true：删除成功;false：删除失败
      */
     public boolean delete(Long id);
+
+    /**
+     * 根据主键查询广告对象
+     *
+     * @param id
+     * @return 广告对象
+     */
+    Ad selectById(Long id);
+
+    /**
+     * 根据主键修改
+     *
+     * @param ad 代修改的广告对象
+     * @return 影响的行数
+     */
+    int update(Ad ad);
 }

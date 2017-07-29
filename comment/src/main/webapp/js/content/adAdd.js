@@ -17,6 +17,13 @@ function add() {
 }
 
 /**
+ * 返回列表
+ */
+function goback() {
+    location.href = $("#basePath").val() + "/ad";
+}
+
+/**
  * 表单内容验证
  * @returns {boolean}
  */

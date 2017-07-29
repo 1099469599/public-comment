@@ -19,6 +19,7 @@
 <%--上传图片 所以加multipart/form-data--%>
 <form id="mainForm" method="post" action="${basePath}/ad/add" enctype="multipart/form-data">
     <input type="hidden" id="message" value="${pageCode.msg}"/>
+    <input type="hidden" id="basePath" value="${basePath}"/>
     <div class="right">
         <div class="current">当前位置：<a href="###">内容管理</a> &gt; 广告管理</div>
         <div class="rightCont">
@@ -50,7 +51,8 @@
             <div style="text-align: center; margin-top: 30px;">
                 <input class="tabSub" value="保     存" type="button" onclick="add();"/>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <input class="tabSub" value="返     回" type="button"/>
+                <input class="tabSub" value="返     回" type="button"
+                       onclick="goback();"/>
             </div>
         </div>
     </div>

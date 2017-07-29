@@ -53,7 +53,7 @@ public class AdController {
     /**
      * 新增页初始化
      */
-    @RequestMapping(value = "/addinit", method = RequestMethod.GET)
+    @RequestMapping(value = "/addInit", method = RequestMethod.GET)
     public String initModify() {
         return "/content/adAdd";
     }
@@ -83,5 +83,25 @@ public class AdController {
             model.addAttribute(PageCodeEnum.KEY, PageCodeEnum.REMOVE_FAIL);
         }
         return "forward:/ad";
+    }
+
+    /**
+     * 修改页初始化
+     */
+    @RequestMapping(value = "/modifyInit", method = RequestMethod.POST)
+    public String modifyInit(@RequestParam("id") Long id, Model model) {
+        model.addAttribute("modifyObj", adService.getById(id));
+        return "/content/adModify";
+    }
+
+    @RequestMapping(value = "modify", method = RequestMethod.POST)
+    public String modify(AdDto adDto, Model model) {
+        model.addAttribute("modifyObj", adDto);
+        if (adService.modify(adDto)) {
+            model.addAttribute(PageCodeEnum.KEY, PageCodeEnum.MODIFY_SUCCESS);
+        } else {
+            model.addAttribute(PageCodeEnum.KEY, PageCodeEnum.MODIFY_FAIL);
+        }
+        return "/content/adModify";
     }
 }
