@@ -5,6 +5,7 @@ import com.cheng.dao.impl.AdDaoImpl;
 import com.cheng.dto.AdDto;
 import com.cheng.service.AdService;
 import com.cheng.util.FileUtil;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,25 +64,38 @@ public class AdServiceImpl implements AdService {
     }
 
     @Override
-    public PageInfo<Ad> searchByPage(AdDto adDto) {
-        List<AdDto> result = new ArrayList<AdDto>();
-        Ad condition = new Ad();
-        BeanUtils.copyProperties(adDto, condition);
-        List<Ad> adList = adDao.selectByPage(condition);
+    public PageInfo<AdDto> searchByPage(AdDto adDto) {
+        List<Ad> adList = adDao.selectByPage(adDto);
         //用PageInfo对结果进行包装
         PageInfo<Ad> pageInfo = new PageInfo<>(adList);
-        for (Ad ad : adList) {
-            AdDto addtoTemp = new AdDto();
-            addtoTemp.setImg(adImageUrl + ad.getImgFileName());
-            BeanUtils.copyProperties(ad, addtoTemp);
-            result.add(addtoTemp);
+
+        List<Ad> adListTemp = new ArrayList<>();
+        for (Ad ad : pageInfo.getList()) {
+            AdDto adDtoTemp1 = new AdDto();
+            BeanUtils.copyProperties(ad, adDtoTemp1);
+            adListTemp.add(adDtoTemp1);
         }
-        return pageInfo;
+
+        PageInfo<AdDto> list = new PageInfo<>();
+        BeanUtils.copyProperties(pageInfo, list);
+        list.getList().clear();
+        list.setList(new ArrayList<AdDto>());
+
+        for (Ad ad : adListTemp) {
+            AdDto adDtoTemp2 = new AdDto();
+            BeanUtils.copyProperties(ad, adDtoTemp2);
+            adDtoTemp2.setImg(adImageUrl + ad.getImgFileName());
+            list.getList().add(adDtoTemp2);
+        }
+        return list;
     }
 
     //TODO 事务
     @Override
     public boolean remove(Long id) {
+        Ad ad = adDao.selectById(id);
+        String path = adImageSavePath + ad.getImgFileName();
+        FileUtil.delete(path);
         return adDao.delete(id);
     }
 

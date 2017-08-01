@@ -26,7 +26,7 @@ public interface AdService {
      * @param adDto 查询条件(包含分页对象)
      * @return 广告列表
      */
-    PageInfo<Ad> searchByPage(AdDto adDto);
+    PageInfo<AdDto> searchByPage(AdDto adDto);
 
     /**
      * 删除广告

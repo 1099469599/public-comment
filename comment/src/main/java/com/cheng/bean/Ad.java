@@ -8,7 +8,7 @@ import com.github.pagehelper.Page;
  * 广告表实体类
  * Created by cheng on 2017/7/22.
  */
-@JsonInclude(Include.NON_NULL)
+@JsonInclude(Include.NON_NULL)//空的参数不转换为json内容
 public class Ad extends BaseBean{
 
     /**

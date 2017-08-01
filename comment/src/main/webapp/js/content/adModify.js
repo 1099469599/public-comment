@@ -1,17 +1,21 @@
 $(function () {
     common.showMessage($("#message").val());
     $("#mainForm").validate({
-        rule:{
-            "title":"required",
-            "link":"required",
-            "weight":{
-                required:true,
-                digits:true,
-                maxlength:5
+        rules: {
+            "title": "required",
+            "link": "required",
+            "weight": {
+                required: true,
+                digits: true
             }
         },
-        message:{
-            "title":"请输入标题！"
+        messages: {
+            "title": "请输入标题!",
+            "link": "请输入链接地址!",
+            "weight": {
+                required: "请输入权重!",
+                digits: "请输入数字!"
+            }
         }
     });
 });

@@ -5,15 +5,33 @@
 
 $(function () {
     common.showMessage($("#message").val());
+    $("#mainForm").validate({
+        rules: {
+            "title": "required",
+            "link": "required",
+            "imgFile":"required",
+            "weight": {
+                required: true,
+                digits: true
+            }
+        },
+        messages: {
+            "title": "请输入标题!",
+            "link": "请输入链接地址!",
+            "imgFile":"请选择要上传的文件!",
+            "weight": {
+                required: "请输入权重!",
+                digits: "请输入数字!"
+            }
+        }
+    });
 });
 
 /**
  *添加广告
  */
 function add() {
-    if (check()) {
         $("#mainForm").submit();
-    }
 }
 
 /**
@@ -23,11 +41,3 @@ function goback() {
     location.href = $("#basePath").val() + "/ad";
 }
 
-/**
- * 表单内容验证
- * @returns {boolean}
- */
-function check() {
-    //TODO 需要添加表单验证
-    return true;
-}

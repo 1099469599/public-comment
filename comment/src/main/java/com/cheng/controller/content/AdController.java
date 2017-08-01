@@ -35,7 +35,7 @@ public class AdController {
      */
     @RequestMapping
     public String initList(Model model) {
-        PageInfo<Ad> pageInfo = adService.searchByPage(new AdDto());
+        PageInfo<AdDto> pageInfo = adService.searchByPage(new AdDto());
         model.addAttribute("pageInfo", pageInfo);
         return "/content/adList";
     }
@@ -45,7 +45,7 @@ public class AdController {
      */
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public String search(Model model, AdDto adDto) {
-        PageInfo<Ad> pageInfo = adService.searchByPage(adDto);
+        PageInfo<AdDto> pageInfo = adService.searchByPage(adDto);
         model.addAttribute("pageInfo", pageInfo);
         return "/content/adList";
     }
@@ -76,7 +76,6 @@ public class AdController {
      */
     @RequestMapping(value = "/remove", method = RequestMethod.POST)
     public String remove(@RequestParam("id") Long id, Model model) {
-        System.out.println(id);
         if (adService.remove(id)) {
             model.addAttribute(PageCodeEnum.KEY, PageCodeEnum.REMOVE_SUCCESS);
         } else {
@@ -94,6 +93,9 @@ public class AdController {
         return "/content/adModify";
     }
 
+    /**
+     * 修改广告Dto
+     */
     @RequestMapping(value = "modify", method = RequestMethod.POST)
     public String modify(AdDto adDto, Model model) {
         model.addAttribute("modifyObj", adDto);

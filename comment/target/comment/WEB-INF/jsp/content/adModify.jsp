@@ -12,8 +12,8 @@
     <link rel="stylesheet" type="text/css" href="${basePath}/css/jquery.validate.css"/>
 
     <script type="text/javascript" src="${basePath}/js/common/jquery-1.8.3.js"></script>
-    <script type="text/javascript" src="${basePath}/js/common/validation/jquery.validate.min.js"></script>
-    <script type="text/javascript" src="${basePath}/js/common/validation/messages_zh.min.js"></script>
+    <script type="text/javascript" src="${basePath}/js/common/validation/jquery.validate.js"></script>
+    <script type="text/javascript" src="${basePath}/js/common/validation/messages_zh.js"></script>
     <script type="text/javascript" src="${basePath}/js/common/common.js"></script>
     <script type="text/javascript" src="${basePath}/js/content/adModify.js"></script>
 </head>
@@ -47,7 +47,7 @@
                         <input id="link" name="link" value="${modifyObj.link}" class="allInput" style="width: 100%;"
                                type="text"/>
                     </td>
-                    <td align="right" width="10%">权重(值越大的排名越考前)<font color="red">*</font>：</td>
+                    <td align="right" width="10%">权重(值越大排名越前)<font color="red">*</font>：</td>
                     <td width="30%">
                         <input id="weight" name="weight" value="${modifyObj.weight}" class="allInput"
                                style="width:100%;" type="text"/>

@@ -2,5 +2,6 @@ input.error { border: 1px dotted red; }
 label.error {
 	/* delete the next line when you have trouble in IE6 with labels in list */
 	color: red;
-	font-style: italic
+    font-family: "微软雅黑",arial;
+    font-size: 13px;
 }
