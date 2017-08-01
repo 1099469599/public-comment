@@ -6,7 +6,7 @@ import com.cheng.dto.AdDto;
 import java.util.List;
 
 /**
- * 广告模块dao接口
+ * 广告模块持久层接口
  * Created by cheng on 2017/7/22.
  */
 

@@ -6,7 +6,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE"/>
     <title>大众点评后台管理</title>
-
     <link href="${basePath}/css/all.css" rel="stylesheet" type="text/css"/>
     <link href="${basePath}/css/pop.css" rel="stylesheet" type="text/css"/>
     <link href="${basePath}/css/index.css" rel="stylesheet" type="text/css"/>
@@ -17,11 +16,13 @@
 <body>
 <!-- 蒙版DIV -->
 <div id="mengban" style="display:none"></div>
+
 <div class="wishlistBox" style="display: none;left:550px;top:200px;">
     <div class="personRigTop persongBgimg" style="height:200px;width:480px;">
         <div class="persongRightTit" style="width:480px;">&nbsp;&nbsp;修改密码</div>
         <div class="persongRigCon">
             <form name="redisAddOrEditForm" action="#" method="post">
+                <input type="hidden" id="basePath" value="${basePath}"/>
                 <table class="x-form-table">
                     <tbody>
                     <tr class="line">
@@ -49,8 +50,8 @@
                         <td class="left"></td>
                         <td class="submit">
                             <input id="submitVal" class="tabSub" value="提交"
-                                   onclick="" type="button"/>
-                            <input class="tabSub" value="关闭" onclick="" type="reset"/>
+                                   onclick="checkForm('http://127.0.0.1:8081/comment');" type="button"/>
+                            <input class="tabSub" value="关闭" onclick="closeDiv();" type="reset"/>
                         </td>
                     </tr>
                     </tbody>
@@ -69,13 +70,13 @@
                 <div class="h_info">
                     <span class="line"></span>
                     欢迎您！姓名[账号]&nbsp; 当前时间：2017年03月20日&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="javascript:void(0);" onclick="">[修改密码]</a>
+                    <a href="javascript:void(0);" onclick="openAddDiv();">[修改密码]</a>
                     &nbsp;
-                    <a href="javascript:void(0);" onclick="if(confirm('您确认退出系统?')){};">[退出系统]</a>
+                    <a href="javascript:void(0);"
+                       onclick="if(confirm('您确认退出系统?')){$('#mainForm').submit();}">[退出系统]</a>
                 </div>
             </div>
             <ul class="nav" id="mainMenuUl">
-                <li onclick="clickFirstMenu(this)" class="on"><a><span>系统管理</span></a></li>
                 <li onclick="clickFirstMenu(this)" class=""><a><span>内容管理</span></a></li>
             </ul>
         </div>
@@ -86,8 +87,9 @@
             <tr>
                 <td class="leftTd" style="vertical-align:top" width="150">
                     <div class="left">
-                        <div class="left" id="menuDiv">
+                        <div class="ileft" id="menuDiv">
                             <h3 onclick="clickSecondMenu(this,'${basePath}/ad');"><a>广告管理</a></h3>
+                            <h3 onclick="clickSecondMenu(this,'${basePath}/businesses');"><a>商户管理</a></h3>
                         </div>
                     </div>
                 </td>
@@ -103,7 +105,6 @@
             </tbody>
         </table>
     </div>
-
     <div id="footer">
         <div class="copyright">cheng zhang</div>
         <div class="flr">copyright &copy;</div>

@@ -2,7 +2,6 @@ package com.cheng.dao.impl;
 
 import com.cheng.bean.Ad;
 import com.cheng.dao.AdDao;
-import com.cheng.dto.AdDto;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * 广告模块dao实现
+ * 广告模块持久层实现
  * Created by cheng on 2017/7/22.
  */
 @Repository

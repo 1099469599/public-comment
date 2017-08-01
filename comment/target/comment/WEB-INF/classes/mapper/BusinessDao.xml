@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cheng.dao.BusinessDao">
+    <resultMap id="BusinessResultMap" type="business">
+        <id column="id" property="id"/>
+        <result column="img_file_name" property="imgFileName"/>
+        <result column="title" property="title"/>
+        <result column="subtitle" property="subtitle"/>
+        <result column="price" property="priice"/>
+        <result column="distance" property="distance"/>
+        <result column="number" property="number"/>
+        <result column="desc" property="desc"/>
+        <result column="city" property="city"/>
+        <result column="category" property="category"/>
+        <result column="star_total_num" property="starTotalNum"/>
+        <result column="comment_total_num" property="commentTotalNum"/>
+    </resultMap>
+
+    <select id="selectByPage" resultType="business">
+
+    </select>
+</mapper>

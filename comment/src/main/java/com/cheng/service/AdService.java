@@ -7,7 +7,7 @@ import com.github.pagehelper.PageInfo;
 import java.util.List;
 
 /**
- * 广告模块service接口
+ * 广告模块业务层接口
  * Created by cheng on 2017/7/22.
  */
 
