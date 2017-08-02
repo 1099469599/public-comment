@@ -10,7 +10,6 @@
     function transCurrentPage(pageNum) {
         var rule = /^[0-9]*[1-9][0-9]*$/;
         if (!rule.test(pageNum)) {
-            console.log(pageNum);
             pageNum = 1;
         }
         eval("${jsMethodName}(pageNum);");

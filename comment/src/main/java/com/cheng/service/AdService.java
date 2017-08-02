@@ -1,10 +1,7 @@
 package com.cheng.service;
 
-import com.cheng.bean.Ad;
 import com.cheng.dto.AdDto;
 import com.github.pagehelper.PageInfo;
-
-import java.util.List;
 
 /**
  * 广告模块业务层接口
@@ -45,10 +42,10 @@ public interface AdService {
     AdDto getById(Long id);
 
     /**
-     * 根据主键修改广告的dto对象
+     * 根据主键修改广告对象
      *
      * @param adDto 广告dto对象
-     * @return 是否修改成功：true-修改成功;fals-修改失败
+     * @return 是否修改成功：true-修改成功;false-修改失败
      */
     boolean modify(AdDto adDto);
 }

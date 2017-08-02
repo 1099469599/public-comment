@@ -1,90 +1,74 @@
 package com.cheng.dto;
 
+import com.cheng.bean.Business;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import org.springframework.web.multipart.MultipartFile;
 
+/**
+ * 商户模块dto
+ */
 @JsonInclude(Include.NON_NULL)
-public class BusinessDto {
+public class BusinessDto extends Business {
 
-	private Long id;
-	private String img;
-	private String mumber;
-	private String title;
-	private String subTitle;
-	private String price;
-	private String distance;
-	private Integer star;
-	private String desc;
+    /**
+     * 图片地址
+     */
+    private String img;
+    /**
+     * 图片文件
+     */
+    private MultipartFile imgFile;
+    /**
+     * 关键字
+     */
+    private String keyword;
+    /**
+     * 数
+     */
+    private Integer mumber;
+    /**
+     * 星级
+     */
+    private Integer star;
 
-	public String getImg() {
-		return img;
-	}
+    public String getImg() {
+        return img;
+    }
 
-	public void setImg(String img) {
-		this.img = img;
-	}
+    public void setImg(String img) {
+        this.img = img;
+    }
 
-	public String getMumber() {
-		return mumber;
-	}
+    public MultipartFile getImgFile() {
+        return imgFile;
+    }
 
-	public void setMumber(String mumber) {
-		this.mumber = mumber;
-	}
+    public void setImgFile(MultipartFile imgFile) {
+        this.imgFile = imgFile;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public String getKeyword() {
+        return keyword;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
 
-	public String getSubTitle() {
-		return subTitle;
-	}
+    public Integer getMumber() {
+        return mumber;
+    }
 
-	public void setSubTitle(String subTitle) {
-		this.subTitle = subTitle;
-	}
+    public void setMumber(Integer mumber) {
+        this.mumber = mumber;
+    }
 
-	public String getPrice() {
-		return price;
-	}
+    public Integer getStar() {
+        return star;
+    }
 
-	public void setPrice(String price) {
-		this.price = price;
-	}
-
-	public String getDistance() {
-		return distance;
-	}
-
-	public void setDistance(String distance) {
-		this.distance = distance;
-	}
-
-	public Integer getStar() {
-		return star;
-	}
-
-	public void setStar(Integer star) {
-		this.star = star;
-	}
-
-	public String getDesc() {
-		return desc;
-	}
-
-	public void setDesc(String desc) {
-		this.desc = desc;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setStar(Integer star) {
+        this.star = star;
+    }
 }

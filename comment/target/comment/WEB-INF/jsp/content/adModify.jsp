@@ -20,6 +20,7 @@
 <body style="background: #e1e9eb;">
 <form id="mainForm" method="post" action="${basePath}/ad/modify" enctype="multipart/form-data">
     <input type="hidden" name="id" value="${modifyObj.id}"/>
+    <input type="hidden" name="imgFileName" value="${modifyObj.imgFileName}"/>
     <input type="hidden" id="message" value="${pageCode.msg}"/>
     <input type="hidden" id="basePath" value="${basePath}"/>
     <div class="right">
@@ -36,8 +37,7 @@
                     </td>
                     <td align="right" width="10%">上传图片：</td>
                     <td width="30%">
-                        <a href="${modifyObj.img}">查看图片</a>
-                        <input type="hidden" name="img" value="${modifyObj.img}"/>
+                        <a href="${modifyObj.img}">查看图片${modifyObj.imgFileName}</a>
                         <input id="imgFile" name="imgFile" class="allInput" style="width: 100%;" type="file"/>
                     </td>
                 </tr>

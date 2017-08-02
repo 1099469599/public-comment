@@ -12,7 +12,7 @@ import java.util.UUID;
  * Created by cheng on 2017/7/22.
  */
 
-public class  CommonUtil {
+public class CommonUtil {
 
     /**
      * 方法描述：判断一个字符串是否为null或空字符串

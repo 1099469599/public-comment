@@ -20,7 +20,7 @@
 <body style="background: #e1e9eb;">
 <form action="${basePath}/ad/search" id="mainForm" method="post">
     <input type="hidden" id="id" name="id"/>
-    <input type="hidden" id="message" name="${pageCode.msg}"/>
+    <input type="hidden" id="message" value="${pageCode.msg}"/>
     <input type="hidden" id="basePath" value="${basePath}"/>
     <input type="hidden" id="pageNum" name="page.pageNum"/>
     <div class="right">
@@ -32,8 +32,7 @@
                 <tr>
                     <td align="right" width="80">标题：</td>
                     <td>
-                        <%-- TODO 查询信息回显 --%>
-                        <input id="title" name="title" value="" class="allInput" type="text"/>
+                        <input id="title" name="title" value="${searchParam.title}" class="allInput" type="text"/>
                     </td>
                     <td style="text-align: right;" width="150">
                         <input class="tabSub" value="查询" onclick="search('1');" type="button"/>
@@ -69,7 +68,7 @@
                 </table>
 
                 <!-- 分页 -->
-                <t:page jsMethodName="search" page="${pageInfo}"></t:page>
+                <t:page jsMethodName="search" page="${pageInfo}"/>
             </div>
         </div>
     </div>

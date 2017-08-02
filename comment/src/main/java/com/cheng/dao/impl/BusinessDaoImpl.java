@@ -2,6 +2,7 @@ package com.cheng.dao.impl;
 
 import com.cheng.bean.Business;
 import com.cheng.dao.BusinessDao;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -18,7 +19,34 @@ public class BusinessDaoImpl implements BusinessDao {
     private BusinessDao businessesDao;
 
     @Override
-    public List<Business> selectByPage(Business businessTemp) {
-        return businessesDao.selectByPage(businessTemp);
+    public List<Business> selectByPage(Business business) {
+        PageHelper.startPage(business.getPage().getPageNum(), business.getPage().getPageSize());
+        return businessesDao.selectByPage(business);
+    }
+
+    @Override
+    public Business selectById(Long id) {
+        return businessesDao.selectById(id);
+    }
+
+    @Override
+    public boolean delete(Long id) {
+        return businessesDao.delete(id);
+    }
+
+    @Override
+    public int update(Business business) {
+        return businessesDao.update(business);
+    }
+
+    @Override
+    public boolean insert(Business business) {
+        return businessesDao.insert(business);
+    }
+
+    @Override
+    public List<Business> selectLikeByPage(Business business) {
+        PageHelper.startPage(business.getPage().getPageNum(), business.getPage().getPageSize());
+        return businessesDao.selectLikeByPage(business);
     }
 }

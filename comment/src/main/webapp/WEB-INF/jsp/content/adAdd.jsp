@@ -32,21 +32,25 @@
                 <tr>
                     <td align="right" width="10%">标题<font color="red">*</font>：</td>
                     <td width="30%">
-                        <input id="title" name="title" class="allInput" style="width:100%;" type="text"/>
+                        <input id="title" name="title" value="${addParam.title}" class="allInput" style="width:100%;"
+                               type="text"/>
                     </td>
                     <td align="right" width="10%">上传图片<font color="red">*</font>：</td>
                     <td width="30%">
-                        <input id="imgFile" name="imgFile" class="allInput" style="width:100%;" type="file"/>
+                        <input id="imgFile" name="imgFile" value="${addParam.img}" class="allInput" style="width:100%;"
+                               type="file"/>
                     </td>
                 </tr>
                 <tr>
                     <td align="right" width="10%">链接地址<font color="red">*</font>：</td>
                     <td width="30%">
-                        <input id="link" name="link" class="allInput" style="width:100%;" type="text"/>
+                        <input id="link" name="link" value="${addParam.link}" class="allInput" style="width:100%;"
+                               type="text"/>
                     </td>
                     <td align="right" width="10%">权重(值越大排名越前)<font color="red">*</font>：</td>
                     <td width="30%">
-                        <input id="weight" name="weight" class="allInput" style="width:100%;" type="text"/>
+                        <input id="weight" name="weight" value="${addParam.weight}" class="allInput" style="width:100%;"
+                               type="text"/>
                     </td>
                 </tr>
                 </tbody>

@@ -56,8 +56,8 @@ public class AdServiceImpl implements AdService {
 
     @Override
     public PageInfo<AdDto> searchByPage(AdDto adDto) {
-        Ad adTemp=new Ad();
-        BeanUtils.copyProperties(adDto,adTemp);
+        Ad adTemp = new Ad();
+        BeanUtils.copyProperties(adDto, adTemp);
         List<Ad> adList = adDao.selectByPage(adTemp);
         //用PageInfo对结果进行包装
         PageInfo<Ad> pageInfo = new PageInfo<>(adList);
@@ -88,8 +88,11 @@ public class AdServiceImpl implements AdService {
     public boolean remove(Long id) {
         Ad ad = adDao.selectById(id);
         String path = adImageSavePath + ad.getImgFileName();
-        FileUtil.delete(path);
-        return adDao.delete(id);
+        if (adDao.delete(id)) {
+            FileUtil.delete(path);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -110,6 +113,7 @@ public class AdServiceImpl implements AdService {
             try {
                 fileName = FileUtil.save(adDto.getImgFile(), adImageSavePath);
                 ad.setImgFileName(fileName);
+
             } catch (IOException e) {
                 return false;
             }
@@ -119,8 +123,9 @@ public class AdServiceImpl implements AdService {
             return false;
         }
         if (fileName != null) {
-            FileUtil.delete(adImageSavePath + ad.getImgFileName());
+            FileUtil.delete(adImageSavePath + adDto.getImgFileName());
         }
+        adDto.setImgFileName(fileName);
         return true;
     }
 }

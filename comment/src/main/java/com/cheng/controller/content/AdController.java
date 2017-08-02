@@ -47,6 +47,7 @@ public class AdController {
     public String search(Model model, AdDto adDto) {
         PageInfo<AdDto> pageInfo = adService.searchByPage(adDto);
         model.addAttribute("pageInfo", pageInfo);
+        model.addAttribute("searchParam", adDto);
         return "/content/adList";
     }
 
@@ -68,6 +69,7 @@ public class AdController {
         } else {
             model.addAttribute(PageCodeEnum.KEY, PageCodeEnum.ADD_FAIL);
         }
+        model.addAttribute("addParam", adDto);
         return "/content/adAdd";
     }
 
@@ -98,12 +100,12 @@ public class AdController {
      */
     @RequestMapping(value = "modify", method = RequestMethod.POST)
     public String modify(AdDto adDto, Model model) {
-        model.addAttribute("modifyObj", adDto);
         if (adService.modify(adDto)) {
             model.addAttribute(PageCodeEnum.KEY, PageCodeEnum.MODIFY_SUCCESS);
         } else {
             model.addAttribute(PageCodeEnum.KEY, PageCodeEnum.MODIFY_FAIL);
         }
+        model.addAttribute("modifyObj", adDto);
         return "/content/adModify";
     }
 }

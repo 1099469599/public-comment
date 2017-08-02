@@ -2,6 +2,7 @@ package com.cheng.controller.api;
 
 import com.cheng.dto.*;
 import com.cheng.service.AdService;
+import com.cheng.service.BusinessService;
 import com.cheng.service.impl.AdServiceImpl;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,8 +29,17 @@ public class ApiController {
     @Autowired
     private AdServiceImpl adService;
 
+    @Autowired
+    private BusinessService businessService;
+
     @Value("${ad.number}")
     private int adNumber;
+
+    @Value("${businessSearch.number}")
+    private int businessSearchNumber;
+
+    @Value("${businessHome.number}")
+    private int businessHomeNumber;
 
     /**
      * 首页 —— 广告（超值特惠）
@@ -44,45 +54,36 @@ public class ApiController {
     /**
      * 首页 —— 推荐列表（猜你喜欢）
      */
-    @RequestMapping(value = "/homelist/{city}/{page.currentPage}", method = RequestMethod.GET)
-    public BusinessListDto homelist(BusinessDto businessDto) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        String info = "";
-        return mapper.readValue(info, new TypeReference<BusinessListDto>() {
-        });
+    @RequestMapping(value = "/homelist/{city}/{page.pageNum}", method = RequestMethod.GET)
+    public BusinessListDto homelist(BusinessDto businessDto) {
+        businessDto.getPage().setPageSize(businessHomeNumber);
+        return businessService.searchByPageForApi(businessDto);
     }
 
     /**
      * 搜索结果页 - 三个参数
      */
-    @RequestMapping(value = "/search/{page.currentPage}/{city}/{category}/{keyword}", method = RequestMethod.GET)
+    @RequestMapping(value = "/search/{page.pageNum}/{city}/{category}/{keyword}", method = RequestMethod.GET)
     public BusinessListDto searchByKeyword(BusinessDto businessDto) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        String info = "";
-        return mapper.readValue(info, new TypeReference<BusinessListDto>() {
-        });
+        businessDto.getPage().setPageNum(businessSearchNumber);
+        return businessService.searchByPageForApi(businessDto);
     }
 
     /**
      * 搜索结果页 - 两个参数
      */
-    @RequestMapping(value = "/search/{page.currentPage}/{city}/{category}", method = RequestMethod.GET)
-    public BusinessListDto search(BusinessDto businessDto) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        String info = "";
-        return mapper.readValue(info, new TypeReference<BusinessListDto>() {
-        });
+    @RequestMapping(value = "/search/{page.pageNum}/{city}/{category}", method = RequestMethod.GET)
+    public BusinessListDto search(BusinessDto businessDto) {
+        businessDto.getPage().setPageNum(businessSearchNumber);
+        return businessService.searchByPageForApi(businessDto);
     }
 
     /**
      * 详情页 - 商户信息
      */
     @RequestMapping(value = "/detail/info/{id}", method = RequestMethod.GET)
-    public BusinessDto detail(@PathVariable("id") long id) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        String info = "";
-        return mapper.readValue(info, new TypeReference<BusinessDto>() {
-        });
+    public BusinessDto detail(@PathVariable("id") long id) {
+        return businessService.getById(id);
     }
 
     /**

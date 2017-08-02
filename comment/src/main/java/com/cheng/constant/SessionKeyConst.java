@@ -6,7 +6,6 @@ package com.cheng.constant;
  */
 
 public class SessionKeyConst {
-
     /**
      * 用户信息的Key值
      */

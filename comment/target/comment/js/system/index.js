@@ -1,4 +1,5 @@
 /**
+ * 主页
  * Created by cheng on 2017/7/25.
  */
 
@@ -22,9 +23,9 @@ function clickFirstMenu(element) {
  */
 function clickSecondMenu(element, path) {
     //将其他有[选中模式]的节点清空
-    $("#menuDiv").attr("class", "");
+    $("#menuDiv").children().children().attr("class", "");
     //将当前单机的节点置为[选中模式]
-    $(element).attr("class", "on");
+    $(element).children().attr("class", "on");
     //将当前页面跳转到指定的地址
     $("#mainPage").attr("src", path);
 }

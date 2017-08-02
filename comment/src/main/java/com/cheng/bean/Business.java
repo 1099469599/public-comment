@@ -68,6 +68,7 @@ public class Business extends BaseBean {
      */
     private Dic categoryDic;
 
+
     public Long getId() {
         return id;
     }
@@ -179,4 +180,5 @@ public class Business extends BaseBean {
     public void setCategoryDic(Dic categoryDic) {
         this.categoryDic = categoryDic;
     }
+
 }

@@ -10,7 +10,7 @@
     </welcome-file-list>
 
     <context-param>
-        <!-- Spring的根上下文 -->
+        <!-- Spring的根上下文的配置文件 -->
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:spring/root-context.xml</param-value>
     </context-param>

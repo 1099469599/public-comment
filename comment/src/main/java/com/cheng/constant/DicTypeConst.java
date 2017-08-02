@@ -14,6 +14,9 @@ public class DicTypeConst {
     /**
      * 类别
      */
-    public static final String CATEGORY = "caategory";
-
+    public static final String CATEGORY = "category";
+    /**
+     * http动作
+     */
+    public static final String HTTP_METHOD = "httpMethod";
 }

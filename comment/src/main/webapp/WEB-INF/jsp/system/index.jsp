@@ -89,7 +89,7 @@
                     <div class="left">
                         <div class="ileft" id="menuDiv">
                             <h3 onclick="clickSecondMenu(this,'${basePath}/ad');"><a>广告管理</a></h3>
-                            <h3 onclick="clickSecondMenu(this,'${basePath}/businesses');"><a>商户管理</a></h3>
+                            <h3 onclick="clickSecondMenu(this,'${basePath}/business');"><a>商户管理</a></h3>
                         </div>
                     </div>
                 </td>
