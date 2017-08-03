@@ -14,6 +14,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,7 +24,6 @@ import java.util.List;
  * 商户模块业务层实现
  * Created by cheng on 2017/7/22.
  */
-
 @Service
 public class BusinessServiceImpl implements BusinessService {
 

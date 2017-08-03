@@ -111,6 +111,7 @@
             <version>2.4</version>
         </dependency>
 
+        <!-- logback依赖包 -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
