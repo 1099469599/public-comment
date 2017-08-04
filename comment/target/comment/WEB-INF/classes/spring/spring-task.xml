@@ -19,7 +19,7 @@
         <!-- ref:组件名称 method：方法名 cron：控制时间 -->
         <!-- cron(一般六位，第七位可有可无，是年) 秒，分，时，日，月，星期，年 -->
         <!-- 同步已售数量 -->
-        <task:scheduled ref="businessTask" method="synNumber" cron="0 */1 * * * ?"/>
+        <task:scheduled ref="businessTask" method="synNumber" cron="*/20 * * * * ?"/>
         <!-- 同步星级 -->
         <!--<task:scheduled ref="businessTask" method="synStar" cron="0 */1 * * * ?"/>-->
     </task:scheduled-tasks>

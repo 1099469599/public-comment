@@ -42,6 +42,13 @@
 
     <select id="selectById" resultType="orders">
           SELECT id,business_id,member_id,num,comment_state,price
-          FROM order WHERE id=#{_parameter}
+          FROM orders WHERE id=#{_parameter}
+    </select>
+
+    <select id="selectAll" resultType="orders">
+        SELECT orders.* FROM  orders WHERE 1=1
+        <if test="memberId != null ">
+            AND member_id=#{memberId}
+        </if>
     </select>
 </mapper>

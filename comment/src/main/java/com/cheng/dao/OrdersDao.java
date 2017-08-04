@@ -42,4 +42,12 @@ public interface OrdersDao {
      * @return 订单列表
      */
     List<Orders> select(Orders orders);
+
+    /**
+     * 根据条件查询订单列表
+     *
+     * @param orders 查询条件
+     * @return 订单列表2
+     */
+    List<Orders> selectAll(Orders orders);
 }

@@ -10,8 +10,10 @@
     <link href="${basePath}/css/pop.css" rel="stylesheet" type="text/css"/>
     <link href="${basePath}/css/index.css" rel="stylesheet" type="text/css"/>
 
-    <script type="text/javascript" src="${basePath}/js/common/jquery-1.8.3.js"></script>
-    <script type="text/javascript" src="${basePath}/js/system/index.js"></script>
+    <script src="${basePath}/js/common/jquery-1.8.3.js" type="text/javascript"></script>
+    <script src="${basePath}/js/common/common.js" type="text/javascript"></script>
+    <script src="${basePath}/js/common/json.js" type="text/javascript"></script>
+    <script src="${basePath}/js/system/index.js" type="text/javascript"></script>
 </head>
 <body>
 <!-- 蒙版DIV -->
@@ -64,9 +66,9 @@
 <form method="post">
     <div id="header">
         <div class="iheader">
-            <%--<div class="logo"><a href="#"><img src="" alt="" height="88px" width="99px"/></a></div>--%>
+            <div class="logo"><a href="#"><img src="" alt="" height="88px" width="99px"/></a></div>
             <div style="height: 44px;">
-                <%--<div class="wuxianlogo"><img src="" alt="" height="28px" width="275px"/></div>--%>
+                <div class="wuxianlogo"><img src="" alt="" height="28px" width="275px"/></div>
                 <div class="h_info">
                     <span class="line"></span>
                     欢迎您！姓名[账号]&nbsp; 当前时间：2017年03月20日&nbsp;&nbsp;&nbsp;&nbsp;
@@ -77,7 +79,9 @@
                 </div>
             </div>
             <ul class="nav" id="mainMenuUl">
-                <li onclick="clickFirstMenu(this)" class=""><a><span>内容管理</span></a></li>
+                <li onclick="clickFirstMenu(this);" class=""><a><span>系统管理</span></a></li>
+                <li onclick="clickFirstMenu(this);" class=""><a><span>内容管理</span></a></li>
+                <li onclick="clickFirstMenu(this);" class=""><a><span>统计报表</span></a></li>
             </ul>
         </div>
     </div>
@@ -90,6 +94,8 @@
                         <div class="ileft" id="menuDiv">
                             <h3 onclick="clickSecondMenu(this,'${basePath}/ad');"><a>广告管理</a></h3>
                             <h3 onclick="clickSecondMenu(this,'${basePath}/business');"><a>商户管理</a></h3>
+                            <h3 onclick="clickSecondMenu(this,'${basePath}/orders');"><a>订单查询</a></h3>
+                            <%--<h3 onclick="clickSecondMenu(this,'${basePath}/business');"><a>评论查询</a></h3>--%>
                         </div>
                     </div>
                 </td>

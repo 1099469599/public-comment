@@ -2,6 +2,7 @@ package com.cheng.dao.impl;
 
 import com.cheng.bean.Orders;
 import com.cheng.dao.OrdersDao;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -36,5 +37,11 @@ public class OrdersDaoImpl implements OrdersDao {
     @Override
     public List<Orders> select(Orders orders) {
         return ordersDao.select(orders);
+    }
+
+    @Override
+    public List<Orders> selectAll(Orders orders) {
+        PageHelper.startPage(orders.getPage().getPageNum(), orders.getPage().getPageSize());
+        return ordersDao.selectAll(orders);
     }
 }

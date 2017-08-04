@@ -31,7 +31,7 @@ public class AdController {
     private AdServiceImpl adService;
 
     /**
-     * 广告管理页初始化点击广告管理菜单进入的第一个页面）
+     * 广告管理页初始化(点击广告管理菜单进入的第一个页面)
      */
     @RequestMapping
     public String initList(Model model) {

@@ -10,7 +10,7 @@ import java.util.Date;
  * Created by cheng on 2017/7/22.
  */
 @JsonInclude(Include.NON_NULL)
-public class Orders {
+public class Orders extends BaseBean{
     /**
      * 主键
      */

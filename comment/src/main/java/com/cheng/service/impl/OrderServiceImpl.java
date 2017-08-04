@@ -7,6 +7,7 @@ import com.cheng.dao.impl.OrdersDaoImpl;
 import com.cheng.dto.OrderForBuyDto;
 import com.cheng.dto.OrdersDto;
 import com.cheng.service.OrderService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -60,5 +61,11 @@ public class OrderServiceImpl implements OrderService {
         }
 
         return result;
+    }
+
+    @Override
+    public PageInfo<Orders> searchByPage(Orders orders) {
+        List<Orders> orderList = ordersDao.selectAll(orders);
+        return new PageInfo(orderList);
     }
 }
