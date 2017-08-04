@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper
+    3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cheng.dao.SysParamDao">
+
+    <select id="selectByKey" resultType="sysParam">
+        SELECT param_key,param_value,param_desc FROM sys_param WHERE param_key=#{_parameter}
+    </select>
+
+    <update id="updateByKey">
+        UPDATE sys_param SET param_value=#{paramValue} WHERE param_key=#{paramKey}
+    </update>
+</mapper>

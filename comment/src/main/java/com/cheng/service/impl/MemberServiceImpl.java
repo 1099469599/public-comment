@@ -24,7 +24,7 @@ public class MemberServiceImpl implements MemberService {
     @Autowired
     private MemberDaoImpl memberDao;
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(MemberService.class);
+    private final static Logger logger = LoggerFactory.getLogger(MemberService.class);
 
     @Override
     public boolean exists(Long phone) {
@@ -43,7 +43,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public boolean sendCode(Long phone, String content) {
-        LOGGER.info(phone + "---" + content);
+        logger.info(phone + "---" + content);
         return true;
     }
 

@@ -3,7 +3,9 @@ package com.cheng.dao;
 
 import com.cheng.bean.Business;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 商户模块持久层接口
@@ -62,4 +64,20 @@ public interface BusinessDao {
      * @return 商户列表
      */
     List<Business> selectLikeByPage(Business business);
+
+    /**
+     * 根据时间更新已售数量
+     *
+     * @param map 更新时间
+     * @return true：更新成功,false：更新失败
+     */
+    void updateNumber(Map<String, Date> map);
+
+    /**
+     * 更新商户的[统计评论星星总数]、[统计评论总次数]，商户的[星级]用这两个字段数据计算得出
+     *
+     * @param map 更新时间
+     * @return
+     */
+    void updateStar(Map<String, Date> map);
 }

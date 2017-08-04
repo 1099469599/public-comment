@@ -69,7 +69,6 @@ public class BusinessServiceImpl implements BusinessService {
     @Override
     public BusinessListDto searchByPageForApi(BusinessDto businessDto) {
         BusinessListDto result = new BusinessListDto();
-
         //组织查询条件
         Business businessForSelect = new Business();
         BeanUtils.copyProperties(businessDto, businessForSelect);

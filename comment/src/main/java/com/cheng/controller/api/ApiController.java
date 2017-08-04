@@ -5,6 +5,7 @@ import com.cheng.dto.*;
 import com.cheng.service.BusinessService;
 import com.cheng.service.impl.AdServiceImpl;
 import com.cheng.service.impl.MemberServiceImpl;
+import com.cheng.service.impl.OrderServiceImpl;
 import com.cheng.util.CommonUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,7 +25,6 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api")
 public class ApiController {
-
     @Autowired
     private AdServiceImpl adService;
 
@@ -33,6 +33,9 @@ public class ApiController {
 
     @Autowired
     private MemberServiceImpl memberService;
+
+    @Autowired
+    private OrderServiceImpl orderService;
 
     @Value("${ad.number}")
     private int adNumber;
@@ -47,7 +50,7 @@ public class ApiController {
      * 首页 —— 广告（超值特惠）
      */
     @RequestMapping(value = "/homead", method = RequestMethod.GET)
-    public List<AdDto> homead() throws IOException {
+    public List<AdDto> homeAd() throws IOException {
         AdDto adDto = new AdDto();
         adDto.getPage().setPageSize(adNumber);
         return adService.searchByPage(adDto).getList();
@@ -57,8 +60,10 @@ public class ApiController {
      * 首页 —— 推荐列表（猜你喜欢）
      */
     @RequestMapping(value = "/homelist/{city}/{page.pageNum}", method = RequestMethod.GET)
-    public BusinessListDto homelist(BusinessDto businessDto) {
+    public BusinessListDto homeList(BusinessDto businessDto) {
         businessDto.getPage().setPageSize(businessHomeNumber);
+        //TODO page.pageNum传值问题
+        // System.out.println(businessDto.getPage().getPageNum()+"---"+businessDto.getPage().getPageSize());
         return businessService.searchByPageForApi(businessDto);
     }
 
@@ -67,7 +72,7 @@ public class ApiController {
      */
     @RequestMapping(value = "/search/{page.pageNum}/{city}/{category}/{keyword}", method = RequestMethod.GET)
     public BusinessListDto searchByKeyword(BusinessDto businessDto) throws IOException {
-        businessDto.getPage().setPageNum(businessSearchNumber);
+        businessDto.getPage().setPageSize(businessSearchNumber);
         return businessService.searchByPageForApi(businessDto);
     }
 
@@ -76,7 +81,7 @@ public class ApiController {
      */
     @RequestMapping(value = "/search/{page.pageNum}/{city}/{category}", method = RequestMethod.GET)
     public BusinessListDto search(BusinessDto businessDto) {
-        businessDto.getPage().setPageNum(businessSearchNumber);
+        businessDto.getPage().setPageSize(businessSearchNumber);
         return businessService.searchByPageForApi(businessDto);
     }
 
@@ -100,27 +105,6 @@ public class ApiController {
     }
 
     /**
-     * 订单列表
-     */
-    @RequestMapping(value = "/orderlist/{username}", method = RequestMethod.GET)
-    public List<OrdersDto> orderList() throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        String info = "";
-        return mapper.readValue(info, new TypeReference<List<OrdersDto>>() {
-        });
-    }
-
-    /**
-     * 提交评论页
-     */
-    @RequestMapping(value = "/submitcomment", method = RequestMethod.GET)
-    public Map<String, Object> submitComment() {
-        Map<String, Object> result = new HashMap<String, Object>();
-        result.put("msg", "ok");
-        return result;
-    }
-
-    /**
      * 根据手机号下发短信验证码
      */
     @RequestMapping(value = "/sms", method = RequestMethod.POST)
@@ -140,7 +124,7 @@ public class ApiController {
                     dto = new ApiCodeDto(ApiCodeEnum.SEND_FAIL);
                 }
             } else {
-                dto = new ApiCodeDto(ApiCodeEnum.SEND_FAIL);
+                dto = new ApiCodeDto(ApiCodeEnum.REPEAT_REQUEST);
             }
         } else {
             dto = new ApiCodeDto(ApiCodeEnum.USER_NOT_EXISTS);
@@ -148,8 +132,9 @@ public class ApiController {
         return dto;
     }
 
+
     /**
-     * 会员登录
+     * 用户登录
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ApiCodeDto login(@RequestParam("username") Long username, @RequestParam("code") String code) {
@@ -172,5 +157,49 @@ public class ApiController {
             dto = new ApiCodeDto(ApiCodeEnum.CODE_INVALID, code);
         }
         return dto;
+    }
+
+    /**
+     * 买单
+     */
+    @RequestMapping(value = "/order", method = RequestMethod.POST)
+    public ApiCodeDto order(OrderForBuyDto orderForBuyDto) {
+        ApiCodeDto dto = null;
+        //1.校验token是否有效（缓存中是否存在这样一个token，并且对应存放的用户信息（这里指的是手机号）与提交上来的信息一致）
+        Long phone = memberService.getPhone(orderForBuyDto.getToken());
+        if (phone != null && phone.equals(orderForBuyDto.getUsername())) {
+            //2.根据手机号获取用户主键
+            Long memberId = memberService.getIdByPhone(phone);
+            if (orderService.save(orderForBuyDto, memberId)) {
+                //3.保存订单
+                dto = new ApiCodeDto(ApiCodeEnum.SUCCESS);
+                //4.还有一件重要的事未做(商品已售的更新，已经用定时任务完成)
+            } else {
+                dto = new ApiCodeDto(ApiCodeEnum.BUY_FAIL);
+            }
+        } else {
+            dto = new ApiCodeDto(ApiCodeEnum.NOT_LOGGED);
+        }
+        return dto;
+    }
+
+    /**
+     * 订单列表
+     */
+    @RequestMapping(value = "/orderlist/{username}", method = RequestMethod.GET)
+    public List<OrdersDto> orderList(@PathVariable("username") Long username) throws IOException {
+        //根据手机号取出会员id
+        Long memberId = memberService.getIdByPhone(username);
+        return orderService.getListByMemberId(memberId);
+    }
+
+    /**
+     * 提交评论页
+     */
+    @RequestMapping(value = "/submitcomment", method = RequestMethod.GET)
+    public Map<String, Object> submitComment() {
+        Map<String, Object> result = new HashMap<>();
+        result.put("msg", "ok");
+        return result;
     }
 }

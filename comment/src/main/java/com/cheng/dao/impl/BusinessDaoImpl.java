@@ -6,7 +6,9 @@ import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 商户模块持久层实现
@@ -48,5 +50,15 @@ public class BusinessDaoImpl implements BusinessDao {
     public List<Business> selectLikeByPage(Business business) {
         PageHelper.startPage(business.getPage().getPageNum(), business.getPage().getPageSize());
         return businessesDao.selectLikeByPage(business);
+    }
+
+    @Override
+    public void updateNumber(Map<String, Date> map) {
+        businessesDao.updateNumber(map);
+    }
+
+    @Override
+    public void updateStar(Map<String, Date> map) {
+        businessesDao.updateStar(map);
     }
 }

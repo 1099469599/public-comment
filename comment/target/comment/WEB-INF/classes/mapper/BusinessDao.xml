@@ -121,4 +121,25 @@
         INSERT INTO business(img_file_name,title,subtitle,price,distance,`desc`,city,category)
         VALUE (#{imgFileName},#{title},#{subtitle},#{price},#{distance},#{desc},#{city},#{category})
     </insert>
+
+    <update id="updateNumber">
+        UPDATE business b,
+        (SELECT business_id,create_time,COUNT(*) cou FROM orders GROUP BY business_id) c
+        SET b.number=b.number + c.cou WHERE b.id=c.business_id
+        <if test="startTime != null">
+            AND c.create_time &gt;= #{startTime}
+        </if>
+    </update>
+
+    <update id="updateStar">
+        UPDATE business b,
+        (SELECT o.business_id,sum(c.star) star_num,COUNT(*) comment_num FROM comment c,orders o
+        WHERE c.order_id=o.id AND c.create_time &lt;=#{endTime}
+        <if test="startTime != null">
+            AND c.create_time &gt; #{startTime}
+        </if>
+        GROUP BY o.business_id) t
+        SET b.star_total_num=b.star_total_num+t.star_num,b.comment_total_num=b.comment_total_num+t.comment_num
+        WHERE b.id=t.business_id
+    </update>
 </mapper>
