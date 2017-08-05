@@ -15,12 +15,11 @@
 
     <script type="text/javascript" src="${basePath}/js/common/jquery-1.8.3.js"></script>
     <script type="text/javascript" src="${basePath}/js/common/common.js"></script>
-    <script type="text/javascript" src="${basePath}/js/content/adList.js"></script>
+    <script type="text/javascript" src="${basePath}/js/content/orderList.js"></script>
 </head>
 <body style="background: #e1e9eb;">
 <form action="${basePath}/orders/search" id="mainForm" method="post">
     <input type="hidden" id="id" name="id"/>
-    <input type="hidden" id="message" value="${pageCode.msg}"/>
     <input type="hidden" id="basePath" value="${basePath}"/>
     <input type="hidden" id="pageNum" name="page.pageNum"/>
     <div class="right">
@@ -50,7 +49,7 @@
                         <th>订单号</th>
                         <th>消费人数</th>
                         <th>金额(元)</th>
-                        <th>订单创建时间</th>
+                        <th>消费时间</th>
                     </tr>
                     <c:forEach items="${pageInfo.list}" var="item" varStatus="s">
                         <tr>
@@ -71,6 +70,5 @@
         </div>
     </div>
 </form>
-
 </body>
 </html>

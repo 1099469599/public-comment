@@ -124,11 +124,12 @@
 
     <update id="updateNumber">
         UPDATE business b,
-        (SELECT business_id,create_time,COUNT(*) cou FROM orders GROUP BY business_id) c
-        SET b.number=b.number + c.cou WHERE b.id=c.business_id
+        (SELECT business_id,create_time,COUNT(*) cou FROM orders
         <if test="startTime != null">
-            AND c.create_time &gt;= #{startTime}
+            WHERE (SELECT TIMESTAMPDIFF(SECOND,#{startTime},create_time))>=0
         </if>
+        GROUP BY business_id) c
+        SET b.number=b.number + c.cou WHERE b.id=c.business_id
     </update>
 
     <update id="updateStar">

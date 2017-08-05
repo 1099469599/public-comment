@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cheng.dao.CommentDao">
+    <resultMap id="commentResultMap" type="Comment">
+        <id column="id" property="id"/>
+        <result column="comment" property="comment"/>
+        <result column="star" property="star"/>
+        <result column="create_time" property="createTime"/>
+        <association property="orders" resultMap="com.cheng.dao.OrdersDao.OrdersResultMap"/>
+    </resultMap>
+
+    <insert id="insert">
+        INSERT INTO comment (orders_id,comment,star,create_time)
+        VALUES (#{ordersId},#{comment},#{star},#{createTime})
+    </insert>
+    <select id="selectByPage" resultMap="commentResultMap">
+        SELECT c.id,c.orders_id,c.comment,c.star,c.create_time,m.phone
+        FROM comment c,orders o,business b,member m
+        WHERE c.orders_id = o.id AND o.business_id = b.id
+        AND o.member_id=m.id
+        <if test="orders!= null and orders.business.id != null">
+            AND b.id = #{orders.business.id}
+        </if>
+        <if test="comment != null and comment !=''">
+            AND comment LIKE CONCAT('%',#{comment},'%')
+        </if>
+        ORDER BY create_time DESC
+    </select>
+</mapper>

@@ -39,6 +39,7 @@ public class BusinessTask {
         SysParam sysParam = sysParamDao.selectByKey(SysParamKeyConst.LAST_SYNC_NUMBER_TIME);
         Map<String, Date> map = new HashMap<>();
         map.put("startTime", sysParam.getParamValue());
+        System.out.println(sysParam.getParamValue());
         //以当前系统事件作为同步的截至时间，同时也做为下次同步的起始时间
         Date endTime = new Date();
         //按这样起始时间-结束时间同步：商户对应的[已售数量]

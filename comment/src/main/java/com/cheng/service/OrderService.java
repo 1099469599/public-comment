@@ -36,4 +36,12 @@ public interface OrderService {
      * @return 订单列表
      */
     PageInfo<Orders> searchByPage(Orders orders);
+
+    /**
+     * 根据主键获取订单的Dto对象
+     *
+     * @param id 订单表主键值
+     * @return 订单的Dto对象
+     */
+    OrdersDto getById(Long id);
 }

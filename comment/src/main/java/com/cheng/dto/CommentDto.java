@@ -1,10 +1,18 @@
 package com.cheng.dto;
 
-public class CommentDto {
-    
+
+import com.cheng.bean.Comment;
+
+/**
+ * 评论模块dto
+ * Created by cheng on 2017/7/22.
+ */
+
+public class CommentDto extends Comment {
+    /**
+     * 隐藏中间4位手机号
+     */
     private String username;
-    private String comment;
-    private Integer star;
 
     public String getUsername() {
         return username;
@@ -13,20 +21,4 @@ public class CommentDto {
     public void setUsername(String username) {
         this.username = username;
     }
-
-	public String getComment() {
-		return comment;
-	}
-
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-
-	public Integer getStar() {
-		return star;
-	}
-
-	public void setStar(Integer star) {
-		this.star = star;
-	}
 }

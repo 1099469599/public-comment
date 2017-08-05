@@ -4,19 +4,17 @@ import com.cheng.constant.ApiCodeEnum;
 import com.cheng.dto.*;
 import com.cheng.service.BusinessService;
 import com.cheng.service.impl.AdServiceImpl;
+import com.cheng.service.impl.CommentServiceImpl;
 import com.cheng.service.impl.MemberServiceImpl;
 import com.cheng.service.impl.OrderServiceImpl;
 import com.cheng.util.CommonUtil;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by cheng on 2017/7/22.
@@ -37,6 +35,9 @@ public class ApiController {
     @Autowired
     private OrderServiceImpl orderService;
 
+    @Autowired
+    private CommentServiceImpl commentService;
+
     @Value("${ad.number}")
     private int adNumber;
 
@@ -50,7 +51,7 @@ public class ApiController {
      * 首页 —— 广告（超值特惠）
      */
     @RequestMapping(value = "/homead", method = RequestMethod.GET)
-    public List<AdDto> homeAd() throws IOException {
+    public List<AdDto> homeAd() {
         AdDto adDto = new AdDto();
         adDto.getPage().setPageSize(adNumber);
         return adService.searchByPage(adDto).getList();
@@ -71,7 +72,7 @@ public class ApiController {
      * 搜索结果页 - 三个参数
      */
     @RequestMapping(value = "/search/{page.pageNum}/{city}/{category}/{keyword}", method = RequestMethod.GET)
-    public BusinessListDto searchByKeyword(BusinessDto businessDto) throws IOException {
+    public BusinessListDto searchByKeyword(BusinessDto businessDto) {
         businessDto.getPage().setPageSize(businessSearchNumber);
         return businessService.searchByPageForApi(businessDto);
     }
@@ -96,12 +97,11 @@ public class ApiController {
     /**
      * 详情页 - 用户评论
      */
-    @RequestMapping(value = "/detail/comment/{page}/{id}", method = RequestMethod.GET)
-    public CommentListDto detail() throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        String info = "";
-        return mapper.readValue(info, new TypeReference<CommentListDto>() {
-        });
+    @RequestMapping(value = "/detail/comment/{pageNum}/{businessId}", method = RequestMethod.GET)
+    public CommentListDto detail(@PathVariable("businessId") Long businessId, @PathVariable("pageNum") int pageNum) {
+        Page page = new Page();
+        page.setPageNum(pageNum);
+        return commentService.getListByBusinessId(businessId, page);
     }
 
     /**
@@ -187,7 +187,7 @@ public class ApiController {
      * 订单列表
      */
     @RequestMapping(value = "/orderlist/{username}", method = RequestMethod.GET)
-    public List<OrdersDto> orderList(@PathVariable("username") Long username) throws IOException {
+    public List<OrdersDto> orderList(@PathVariable("username") Long username) {
         //根据手机号取出会员id
         Long memberId = memberService.getIdByPhone(username);
         return orderService.getListByMemberId(memberId);
@@ -196,10 +196,26 @@ public class ApiController {
     /**
      * 提交评论页
      */
-    @RequestMapping(value = "/submitcomment", method = RequestMethod.GET)
-    public Map<String, Object> submitComment() {
-        Map<String, Object> result = new HashMap<>();
-        result.put("msg", "ok");
+    @RequestMapping(value = "/submitComment", method = RequestMethod.POST)
+    public ApiCodeDto submitComment(CommentForSubmitDto dto) {
+        ApiCodeDto result = null;
+        //1.校验登录信息：token、手机号
+        Long phone = memberService.getPhone(dto.getToken());
+        if (phone != null && phone.equals(dto.getUsername())) {
+            //2.根据手机号取出会员id
+            Long memberId = memberService.getIdByPhone(phone);
+            //3.根据提交上来的订单id获取对应的会员id，校验是否与当前id一致
+            OrdersDto ordersDto = orderService.getById(dto.getId());
+            if (ordersDto.getMemberId().equals(memberId)) {
+                //4.保存评论
+                commentService.add(dto);
+                result = new ApiCodeDto(ApiCodeEnum.SUCCESS);
+            } else {
+                result = new ApiCodeDto(ApiCodeEnum.NO_AUTH);
+            }
+        } else {
+            result = new ApiCodeDto(ApiCodeEnum.NOT_LOGGED);
+        }
         return result;
     }
 }

@@ -95,7 +95,7 @@
                             <h3 onclick="clickSecondMenu(this,'${basePath}/ad');"><a>广告管理</a></h3>
                             <h3 onclick="clickSecondMenu(this,'${basePath}/business');"><a>商户管理</a></h3>
                             <h3 onclick="clickSecondMenu(this,'${basePath}/orders');"><a>订单查询</a></h3>
-                            <%--<h3 onclick="clickSecondMenu(this,'${basePath}/business');"><a>评论查询</a></h3>--%>
+                            <h3 onclick="clickSecondMenu(this,'${basePath}/comment');"><a>评论查询</a></h3>
                         </div>
                     </div>
                 </td>

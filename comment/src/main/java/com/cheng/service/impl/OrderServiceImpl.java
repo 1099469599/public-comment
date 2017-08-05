@@ -68,4 +68,15 @@ public class OrderServiceImpl implements OrderService {
         List<Orders> orderList = ordersDao.selectAll(orders);
         return new PageInfo(orderList);
     }
+
+    @Override
+    public OrdersDto getById(Long id) {
+        OrdersDto result = new OrdersDto();
+        Orders orders = ordersDao.selectById(id);
+        if (orders != null) {
+            BeanUtils.copyProperties(orders, result);
+            return result;
+        }
+        return null;
+    }
 }
