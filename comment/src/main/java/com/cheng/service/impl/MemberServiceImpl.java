@@ -15,7 +15,7 @@ import java.util.List;
 
 
 /**
- * 用户模块业务层实现
+ * 会员模块业务层实现
  * Created by cheng on 2017/7/22.
  */
 @Service

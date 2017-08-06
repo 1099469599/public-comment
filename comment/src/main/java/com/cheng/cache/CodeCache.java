@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 验证码缓存，存放用户手机号与所下发的验证码
+ * 验证码缓存，存放会员手机号与所下发的验证码
  * Created by cheng on 2017/7/22.
  */
 

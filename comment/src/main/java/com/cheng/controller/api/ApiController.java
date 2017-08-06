@@ -65,7 +65,8 @@ public class ApiController {
         businessDto.getPage().setPageSize(businessHomeNumber);
         //TODO page.pageNum传值问题
         // System.out.println(businessDto.getPage().getPageNum()+"---"+businessDto.getPage().getPageSize());
-        return businessService.searchByPageForApi(businessDto);
+        BusinessListDto businessListDto = businessService.searchByPageForApi(businessDto);
+        return businessListDto;
     }
 
     /**
@@ -95,7 +96,7 @@ public class ApiController {
     }
 
     /**
-     * 详情页 - 用户评论
+     * 详情页 - 会员评论
      */
     @RequestMapping(value = "/detail/comment/{pageNum}/{businessId}", method = RequestMethod.GET)
     public CommentListDto detail(@PathVariable("businessId") Long businessId, @PathVariable("pageNum") int pageNum) {
@@ -111,7 +112,7 @@ public class ApiController {
     public ApiCodeDto sms(@RequestParam("username") Long username) {
         ApiCodeDto dto;
         String code = null;
-        //1.验证用户手机号是否存在(是否注册过)
+        //1.验证会员手机号是否存在(是否注册过)
         if (memberService.exists(username)) {
             //2.生成6位随机数
             code = String.valueOf(CommonUtil.random(6));
@@ -134,7 +135,7 @@ public class ApiController {
 
 
     /**
-     * 用户登录
+     * 会员登录
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ApiCodeDto login(@RequestParam("username") Long username, @RequestParam("code") String code) {
@@ -165,10 +166,10 @@ public class ApiController {
     @RequestMapping(value = "/order", method = RequestMethod.POST)
     public ApiCodeDto order(OrderForBuyDto orderForBuyDto) {
         ApiCodeDto dto = null;
-        //1.校验token是否有效（缓存中是否存在这样一个token，并且对应存放的用户信息（这里指的是手机号）与提交上来的信息一致）
+        //1.校验token是否有效（缓存中是否存在这样一个token，并且对应存放的会员信息（这里指的是手机号）与提交上来的信息一致）
         Long phone = memberService.getPhone(orderForBuyDto.getToken());
         if (phone != null && phone.equals(orderForBuyDto.getUsername())) {
-            //2.根据手机号获取用户主键
+            //2.根据手机号获取会员主键
             Long memberId = memberService.getIdByPhone(phone);
             if (orderService.save(orderForBuyDto, memberId)) {
                 //3.保存订单

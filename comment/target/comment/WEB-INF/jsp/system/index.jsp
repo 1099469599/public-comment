@@ -15,7 +15,7 @@
     <script src="${basePath}/js/common/json.js" type="text/javascript"></script>
     <script src="${basePath}/js/system/index.js" type="text/javascript"></script>
 </head>
-<body>
+<body onload="getTime();">
 <!-- 蒙版DIV -->
 <div id="mengban" style="display:none"></div>
 
@@ -71,7 +71,7 @@
                 <div class="wuxianlogo"><img src="" alt="" height="28px" width="275px"/></div>
                 <div class="h_info">
                     <span class="line"></span>
-                    欢迎您！姓名[账号]&nbsp; 当前时间：2017年03月20日&nbsp;&nbsp;&nbsp;&nbsp;
+                    欢迎您！姓名[${sessionScope.USER_INFO.chName}]&nbsp; 当前时间：<label id="showTime"></label>&nbsp;&nbsp;&nbsp;&nbsp;
                     <a href="javascript:void(0);" onclick="openAddDiv();">[修改密码]</a>
                     &nbsp;
                     <a href="javascript:void(0);"

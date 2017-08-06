@@ -16,7 +16,7 @@ public interface OrderService {
      * 保存订单
      *
      * @param orderForBuyDto api订单相关dto
-     * @param memberId       用户主键
+     * @param memberId       会员主键
      * @return true:保存成功;false：保存失败
      */
     boolean save(OrderForBuyDto orderForBuyDto, Long memberId);

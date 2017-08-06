@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 /**
- * Api用户验证相关dto
+ * Api会员验证相关dto
  * Created by cheng on 2017/7/22.
  */
 @JsonInclude(Include.NON_NULL)

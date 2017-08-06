@@ -2,7 +2,7 @@ package com.cheng.service;
 
 
 /**
- * 用户模块业务层接口
+ * 会员模块业务层接口
  * Created by cheng on 2017/7/22.
  */
 public interface MemberService {
@@ -50,7 +50,7 @@ public interface MemberService {
     void saveToken(String token, Long phone);
 
     /**
-     * 根据token获取使用户信息(手机号)
+     * 根据token获取使会员信息(手机号)
      *
      * @param token
      * @return 手机号
@@ -58,7 +58,7 @@ public interface MemberService {
     Long getPhone(String token);
 
     /**
-     * 根据手机号获取用户表主键
+     * 根据手机号获取会员表主键
      *
      * @param phone 手机号
      * @return 表主键

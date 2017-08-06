@@ -1,12 +1,12 @@
 package com.cheng.constant;
 
 /**
- * Api用户验证相关常量定义
+ * Api会员验证相关常量定义
  * Created by cheng on 2017/7/22.
  */
 public enum ApiCodeEnum {
     SUCCESS(0, "ok"),
-    USER_NOT_EXISTS(1, "用户不存在!"),
+    USER_NOT_EXISTS(1, "会员不存在!"),
     REPEAT_REQUEST(2, "验证码有效时间内不需重复请求!"),
     SEND_FAIL(3, "发送验证码失败!请稍后重试!"),
     CODE_INVALID(4, "验证码已失效!请重新请求验证码!"),

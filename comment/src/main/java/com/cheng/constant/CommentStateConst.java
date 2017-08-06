@@ -13,5 +13,5 @@ public class CommentStateConst {
     /**
      * 已评论
      */
-    public static final int HAS_COMMENT = 1;
+    public static final int HAS_COMMENT = 2;
 }

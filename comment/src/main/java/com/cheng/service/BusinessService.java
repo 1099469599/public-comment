@@ -6,6 +6,7 @@ import com.github.pagehelper.PageInfo;
 
 /**
  * 商户模块业务层接口
+ * 商户模块业务层接口
  * Created by cheng on 2017/7/22.
  */
 public interface BusinessService {

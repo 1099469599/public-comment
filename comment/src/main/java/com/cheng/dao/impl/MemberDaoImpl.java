@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * 用户模块持久层实现
+ * 会员模块持久层实现
  * Created by cheng on 2017/7/22.
  */
 

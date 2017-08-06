@@ -6,6 +6,7 @@
 /**
  * 方法描述：单机一级菜单（页面上部的菜单），初始化子菜单（即页面左部菜单）
  */
+
 function clickFirstMenu(element) {
     //判断当前单击的节点是否是[选中模式]，如果是[选中模式],不再触发单机事件
     if ($(element).attr("class") != "on") {
@@ -29,7 +30,6 @@ function clickSecondMenu(element, path) {
     //将当前页面跳转到指定的地址
     $("#mainPage").attr("src", path);
 }
-
 
 
 // /**
@@ -89,3 +89,24 @@ function clickSecondMenu(element, path) {
 //     //将当前页面跳转到指定的地址(iframe)
 //     $("#mainPage").attr("src", $("#basePath").val() + path);
 // }
+
+function getTime() {
+    var date = new Date();
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
+    var str = "0";
+    if (hours < 10) {
+        hours = str + hours;
+    }
+    if (minutes < 10) {
+        minutes = str + minutes;
+    }
+    if (seconds < 10) {
+        seconds = str + seconds;
+    }
+    var myDate = date.getFullYear() + "年" + ( date.getMonth() + 1 ) + "月" + date.getDate() + "日 "
+        + hours + ":" + minutes + ":" + seconds;
+    $("#showTime").html(myDate);
+    setTimeout(getTime, 1000);
+}

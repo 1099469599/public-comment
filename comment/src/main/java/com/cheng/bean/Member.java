@@ -1,7 +1,7 @@
 package com.cheng.bean;
 
 /**
- * 用户实体
+ * 会员实体
  * Created by cheng on 2017/7/22.
  */
 public class Member {
@@ -14,7 +14,7 @@ public class Member {
      */
     private Long phone;
     /**
-     * 用户名
+     * 会员名
      */
     private String name;
     /**

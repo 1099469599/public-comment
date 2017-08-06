@@ -17,7 +17,7 @@ public class Comment extends BaseBean {
      */
     private Long id;
     /**
-     * 用户id
+     * 会员id
      */
     private Long ordersId;
     /**

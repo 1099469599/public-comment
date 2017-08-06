@@ -29,7 +29,7 @@
             <table class="tab1">
                 <tbody>
                 <tr>
-                    <td width="80" align="right">用户ID：</td>
+                    <td width="80" align="right">会员ID：</td>
                     <td>
                         <input name="memberId" id="id" value="${searchParam.memberId}" class="allInput" type="text">
                     </td>
@@ -45,7 +45,7 @@
                     <tbody>
                     <tr>
                         <th>序号</th>
-                        <th>用户ID</th>
+                        <th>会员ID</th>
                         <th>订单号</th>
                         <th>消费人数</th>
                         <th>金额(元)</th>

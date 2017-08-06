@@ -16,7 +16,7 @@ public class Orders extends BaseBean{
      */
     private Long id;
     /**
-     * 用户主键
+     * 会员主键
      */
     private Long memberId;
     /**
@@ -40,7 +40,7 @@ public class Orders extends BaseBean{
      */
     private Business business;
     /**
-     * 用户
+     * 会员
      */
     private Member member;
 

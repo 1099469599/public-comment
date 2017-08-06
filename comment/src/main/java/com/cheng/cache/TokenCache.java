@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * token缓存，存放token与对应的用户信息(这里存放的是用户手机号)
+ * token缓存，存放token与对应的会员信息(这里存放的是会员手机号)
  * Created by cheng on 2017/7/22.
  */
 public class TokenCache {
@@ -38,7 +38,7 @@ public class TokenCache {
     }
 
     /**
-     * 根据token获取用户信息(手机号)
+     * 根据token获取会员信息(手机号)
      * @param token
      * @return 手机号
      */

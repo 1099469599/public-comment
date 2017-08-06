@@ -26,7 +26,7 @@ public class OrderForBuyDto {
      */
     private Double price;
     /**
-     * 用户手机号
+     * 会员手机号
      */
     private Long username;
 
