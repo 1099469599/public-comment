@@ -26,13 +26,23 @@ $(function () {
     });
 
     /**
-     * 单机登录
+     * 单击登录
      */
-    $("#submit_login").click(function () {
-        if ($("#password").val()) {
-            $("#password_md5").val($.md5($("#password").val()));
+    $("#submit_login").click(login);
+    /**
+     *
+     */
+    $(document).keydown(function (event) {
+        if (event.keyCode == 13) {
+            login();
         }
-        $("#mainForm").submit();
     });
 
 });
+
+function login() {
+    if ($("#password").val()) {
+        $("#password_md5").val($.md5($("#password").val()));
+    }
+    $("#mainForm").submit();
+}

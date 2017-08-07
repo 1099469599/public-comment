@@ -4,11 +4,11 @@
  */
 
 /**
- * 方法描述：单机一级菜单（页面上部的菜单），初始化子菜单（即页面左部菜单）
+ * 方法描述：单击一级菜单（页面上部的菜单），初始化子菜单（即页面左部菜单）
  */
 
 function clickFirstMenu(element) {
-    //判断当前单击的节点是否是[选中模式]，如果是[选中模式],不再触发单机事件
+    //判断当前单击的节点是否是[选中模式]，如果是[选中模式],不再触发单击事件
     if ($(element).attr("class") != "on") {
         //将同级节点的[选中模式]清空
         $("#mainMenuUl").children().attr("class", "");
@@ -20,12 +20,12 @@ function clickFirstMenu(element) {
 }
 
 /**
- * 方法描述：单机二级菜单（页面左部菜单），初始化主页面
+ * 方法描述：单击二级菜单（页面左部菜单），初始化主页面
  */
 function clickSecondMenu(element, path) {
     //将其他有[选中模式]的节点清空
     $("#menuDiv").children().children().attr("class", "");
-    //将当前单机的节点置为[选中模式]
+    //将当前单击的节点置为[选中模式]
     $(element).children().attr("class", "on");
     //将当前页面跳转到指定的地址
     $("#mainPage").attr("src", path);
@@ -84,7 +84,7 @@ function clickSecondMenu(element, path) {
 // function clickSubMenu(element, path) {
 //     //将其他有[选中模式]的节点的样式清空
 //     $("#subMenuDiv").find(".on").attr("class", "");
-//     //将当前单机的节点置为[选中模式]
+//     //将当前单击的节点置为[选中模式]
 //     $(element).children.attr("class", "on");
 //     //将当前页面跳转到指定的地址(iframe)
 //     $("#mainPage").attr("src", $("#basePath").val() + path);

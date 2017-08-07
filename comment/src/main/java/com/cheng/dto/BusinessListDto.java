@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 /**
- * 商户集合dto
+ * 商户列表dto
  */
 @JsonInclude(Include.NON_NULL)
 public class BusinessListDto {

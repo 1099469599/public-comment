@@ -9,6 +9,9 @@ import com.cheng.bean.User;
 
 public class UserDto extends User{
 
+    /**
+     * 前端zTree表示节点参数
+     */
     private Integer pId;
 
     public Integer getpId() {

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cheng.dao.GroupDao">
+    <resultMap id="GroupResultMap" type="group">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <collection property="menuList" javaType="list" ofType="menu">
+            <result column="menu_id" property="id"/>
+            <result column="menu_name" property="name"/>
+            <result column="url" property="url"/>
+            <result column="parent_id" property="parentId"/>
+            <result column="order_num" property="orderNum"/>
+        </collection>
+        <collection property="actionList" javaType="list" resultMap="com.cheng.dao.AdDao.ActionResultMap"/>
+    </resultMap>
+
+    <select id="select" resultType="com.cheng.bean.Group">
+        SELECT id,name FROM sys_group t
+        <where>
+            <if test="name != null and name != ''">
+                and t.name = #{name}
+            </if>
+        </where>
+        ORDER BY CONVERT(name USING gbk) COLLATE gbk_chinese_ci
+    </select>
+</mapper>

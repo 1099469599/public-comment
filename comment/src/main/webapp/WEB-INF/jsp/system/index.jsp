@@ -96,11 +96,9 @@
                             <h3 onclick="clickSecondMenu(this,'${basePath}/business');"><a>商户管理</a></h3>
                             <h3 onclick="clickSecondMenu(this,'${basePath}/orders');"><a>订单查询</a></h3>
                             <h3 onclick="clickSecondMenu(this,'${basePath}/comment');"><a>评论查询</a></h3>
+                            <h3 onclick="clickSecondMenu(this,'${basePath}/auth');"><a>权限管理</a></h3>
                         </div>
                     </div>
-                </td>
-                <td width="7">
-                    <div class="pointer"></div>
                 </td>
                 <td style="vertical-align:top" height="600px" width="100%">
                     <br/>

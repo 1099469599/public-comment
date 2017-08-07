@@ -9,7 +9,7 @@
         </encoder>
     </appender>
     <!-- 文件输出 -->
-    <appender name="logfile" class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+    <appender name="logfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <Encoding>UTF-8</Encoding>
         <File>${log.base}comment.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">

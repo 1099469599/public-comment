@@ -8,13 +8,14 @@
         <where>
             <if test="name != null and name !=''">
                 AND t.name=#{name}
-            </if> <if test="chName != null and chName !=''">
+            </if>
+            <if test="chName != null and chName !=''">
                 AND t.ch_name=#{chName}
             </if>
             <if test="password != null and password !=''">
                 AND t.password=#{password}
             </if>
         </where>
-        ORDER BY convert(ch_name using gbk) COLLATE gbk_chinese_ci
+        ORDER BY CONVERT(ch_name USING gbk) COLLATE gbk_chinese_ci /*mysql排序：按照中文首字母拼音的顺序排序*/
     </select>
 </mapper>

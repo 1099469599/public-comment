@@ -65,7 +65,7 @@ input, select, teatarea { font:12px Arial, Helvetica, sans-serif; }
 .ileft { width:143px; margin-left:1px;}
 .left h2 { font-size:14px; padding-left:20px; height:36px; line-height:36px; border-bottom:1px solid #dce4e6;}
 .left h3 {cursor:pointer; color:#266392; font-size:14px; font-weight:normal; padding-top:10px; padding-left:20px; margin-bottom:10px; border-top:1px solid #fff;}
-.left h3 a { display:block; width:155px; position:relative; margin-left:-20px; padding-left:20px; height:35px; line-height:32px;color:#266392;}
+.left h3 a { display:block; width:135px; position:relative; margin-left:-20px; padding-left:20px; height:35px; line-height:32px;color:#266392;}
 .leftTd { background:url(../images/tdbg.png) repeat-y 0 0;}
 .left li a {cursor:pointer; display:block; width:120px; padding-left:35px; position:relative; height:35px; line-height:32px; color:#266392;}
 .left li a:hover, .left li.on a,.left h3 a:hover,.left h3 a.on{background:url(../images/liabg.gif) no-repeat; color:#fff; text-decoration:none;}
