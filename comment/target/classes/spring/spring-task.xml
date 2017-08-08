@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:task="http://www.springframework.org/schema/task"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+	        http://www.springframework.org/schema/beans/spring-beans.xsd
+	        http://www.springframework.org/schema/task
+            http://www.springframework.org/schema/task/spring-task.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 扫描task包 -->
+    <context:component-scan base-package="com.cheng.task"/>
+
+    <!-- 启用定时任务 -->
+    <task:scheduled-tasks>
+        <!-- ref:组件名称 method：方法名 cron：控制时间 -->
+        <!-- cron(一般六位，第七位可有可无，是年) 秒，分，时，日，月，星期，年 -->
+        <!-- 同步已售数量 -->
+        <task:scheduled ref="businessTask" method="synNumber" cron="0 0/5 * * * ?"/>
+        <!-- 同步星级 -->
+        <task:scheduled ref="businessTask" method="synStar" cron="0 0/5 * * * ?"/>
+    </task:scheduled-tasks>
+</beans>

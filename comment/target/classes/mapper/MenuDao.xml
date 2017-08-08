@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cheng.dao.MenuDao">
+    <resultMap id="MenuResultMap" type="menu">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="order_num" property="orderNum"/>
+        <collection property="actionList" resultMap="com.cheng.dao.AdDao.ActionResultMap"/>
+    </resultMap>
+    <select id="selectWithAction" resultMap="MenuResultMap">
+        SELECT m.id,m.name,m.url,m.parent_id,a.name action_name
+        ,a.url action_url,a.menu_id action_menu_id,a.id action_id,a.method
+        FROM sys_menu m LEFT JOIN
+        sys_action a on m.id=a.menu_id
+        <where>
+            <if test="parentId != null">
+                AND m.parent_id=#{parentId}
+            </if>
+        </where>
+        ORDER BY m.order_num,CONVERT(a.name USING gbk) COLLATE gbk_chinese_ci
+    </select>
+</mapper>
