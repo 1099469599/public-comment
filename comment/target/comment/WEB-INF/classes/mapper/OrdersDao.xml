@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cheng.dao.OrdersDao">
+    <resultMap id="OrdersResultMap" type="orders">
+        <id column="id" property="id"/>
+        <result column="comment_state" property="commentState"/>
+        <result column="price" property="price"/>
+        <result column="create_time" property="createTime"/>
+        <association property="business" javaType="business">
+            <result column="img_file_name" property="imgFileName"/>
+            <result column="title" property="title"/>
+            <result column="number" property="number"/>
+        </association>
+        <association property="member" javaType="member">
+            <result column="phone" property="phone"/>
+        </association>
+    </resultMap>
+
+    <insert id="insert">
+        INSERT INTO orders(business_id,member_id,num,comment_state,price,create_time)
+        VALUES(#{businessId},#{memberId},#{num},#{commentState},#{price},#{createTime})
+    </insert>
+
+    <update id="update">
+        UPDATE orders
+        <set>
+            <if test="commentState != null">
+                comment_state=#{commentState}
+            </if>
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <select id="select" resultMap="OrdersResultMap">
+        SELECT o.id,o.comment_state,o.price,b.img_file_name,b.title,b.number
+        FROM orders o,business b WHERE o.business_id=b.id
+        <if test="memberId != null">
+            and o.member_id=#{memberId}
+        </if>
+    </select>
+
+    <select id="selectById" resultType="orders">
+          SELECT id,business_id,member_id,num,comment_state,price
+          FROM orders WHERE id=#{_parameter}
+    </select>
+
+    <select id="selectAll" resultType="orders">
+        SELECT orders.* FROM  orders WHERE 1=1
+        <if test="memberId != null ">
+            AND member_id=#{memberId}
+        </if>
+    </select>
+</mapper>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <!-- 配置全局属性 -->
+    <settings>
+        <!-- 使用jdbc的getGeneratedKeys获取数据库自增主键值 -->
+        <setting name="useGeneratedKeys" value="true"/>
+
+        <!-- 开启驼峰命名转换:Table{create_time} -> Entity{createTime} -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+
+        <!-- 配置懒加载 -->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="aggressiveLazyLoading" value="false"/>
+    </settings>
+
+    <!-- pageHelper分页插件 -->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <!-- 配置当前数据库为mysql 默认自动检测 -->
+            <property name="helperDialect" value="mysql"/>
+            <!-- 分页合理化参数，当参数为true时，pageNum<0时会查第一页，
+                pageNum>pages（总页数）时会查最后一页。默认为false，直接根据参数查询 -->
+            <property name="reasonable" value="true"/>
+        </plugin>
+    </plugins>
+</configuration>
