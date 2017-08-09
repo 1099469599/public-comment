@@ -15,6 +15,7 @@
         <collection property="actionList" javaType="list" resultMap="com.cheng.dao.AdDao.ActionResultMap"/>
     </resultMap>
 
+
     <select id="select" resultType="com.cheng.bean.Group">
         SELECT id,name FROM sys_group t
         <where>
@@ -23,5 +24,40 @@
             </if>
         </where>
         ORDER BY CONVERT(name USING gbk) COLLATE gbk_chinese_ci
+    </select>
+
+    <insert id="insert">
+        INSERT INTO sys_group(name)
+        SELECT #{name} FROM dual WHERE NOT EXISTS(SELECT 1 FROM sys_group WHERE name=#{name})
+    </insert>
+
+    <select id="selectById" resultType="group">
+        SELECT id,name FROM sys_group WHERE id=#{id}
+    </select>
+
+    <update id="update">
+        UPDATE sys_group
+        <set>
+            <if test="name != null">
+                name=#{name},
+            </if>
+        </set>
+        WHERE id=#{id} AND NOT EXISTS(SELECT 1 FROM (SELECT 1 FROM sys_group WHERE name=#{name} AND id!=#{id})a)
+    </update>
+
+    <delete id="delete">
+        DELETE FROM sys_group WHERE id=#{id}
+    </delete>
+
+    <select id="selectMenuListById" resultType="group">
+        SELECT g.id,g.name,m.id menu_id,m.name menu_name,m.url,m.parent_id,m.order_num,a.name action_name
+        ,a.id action_id,a.url action_url,a.menu_id action_menu_id,a.method
+        FROM sys_group g
+        LEFT JOIN sys_group_menu gm ON g.id=gm.group_id
+        LEFT JOIN sys_menu m ON gm.menu_id=m.id
+        LEFT JOIN sys_group_action ga ON g.id=ga.group_id
+        LEFT JOIN sys_action a ON ga.action_id =a.id
+        WHERE g.id=#{id}
+        ORDER BY m.order_num
     </select>
 </mapper>

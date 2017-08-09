@@ -18,4 +18,40 @@
         </where>
         ORDER BY CONVERT(ch_name USING gbk) COLLATE gbk_chinese_ci /*mysql排序：按照中文首字母拼音的顺序排序*/
     </select>
+
+    <insert id="insert">
+        INSERT INTO sys_user(name,ch_name,`password`)
+        SELECT  #{name},#{chName},#{password} FROM dual
+        WHERE NOT EXISTS(SELECT 1 FROM sys_user WHERE NAME=#{name})
+    </insert>
+
+    <select id="selectById" resultType="user">
+        SELECT id,ch_name,name,group_id FROM sys_user WHERE id=#{id}
+    </select>
+
+    <update id="update">
+        UPDATE sys_user
+        <set>
+            <if test="name != null">
+                name=#{name},
+            </if>
+            <if test="chName != null">
+                ch_name=#{chName},
+            </if>
+            <if test="password != null">
+                password=#{password},
+            </if>
+            <if test="groupId != null">
+                group_id=#{groupId},
+            </if>
+        </set>
+        WHERE id=#{id}
+        <if test="name != null">
+            AND NOT EXISTS(SELECT 1 FROM(SELECT 1 FROM sys_user WHERE name=#{name} and id!=#{id})a)
+        </if>
+    </update>
+    <delete id="delete">
+        DELETE FROM sys_user WHERE id=#{id}
+    </delete>
+
 </mapper>

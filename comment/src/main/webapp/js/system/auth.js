@@ -174,6 +174,13 @@ function userRightClick(event, treeId, treeNode) {
     }
     $.fn.zTree.getZTreeObj(treeId).selectNode(treeNode);
     rightClick(event, "rMenu");
+
+    if (treeNode.id === 0) {
+        $(".disabled").hide();
+    } else {
+        $(".disabled").show();
+        selectUser();
+    }
 }
 
 /**
@@ -191,7 +198,7 @@ function selectUser() {
     common.ajax({
         url: $("#basePath").val() + "/users/" + nodes[0].id,
         success: function (data) {
-            //如果当前选中的用户有组，则选中这个组
+            //如果当前选中的用户有组，则选中这个用户组
             if (data.groupId) {
                 groupTree.checkNode(groupTree.getNodeByParam("id", data.groupId), true);
             }
@@ -217,7 +224,7 @@ function initModifyUser() {
     mousedown();
     var nodes = $.fn.zTree.getZTreeObj("user").getSelectedNodes();
     common.ajax({
-        url: $("#basepath").val() + "/users/" + nodes[0].id,
+        url: $("#basePath").val() + "/users/" + nodes[0].id,
         success: function (data) {
             clearUser();
             $("#userId").val(data.id);
@@ -257,7 +264,7 @@ function saveUser() {
                 url: $("#basePath").val() + "/users/",
                 type: "POST",
                 success: function (data) {
-                    if (data.code === common.pageCode.MODIFY_SUCCESS) {
+                    if (data.code === common.pageCode.ADD_SUCCESS) {
                         initUserTree();
                         closeUser();
                     }
@@ -266,8 +273,7 @@ function saveUser() {
                 data: {
                     "name": $("#userName").val(),
                     "chName": $("#chName").val(),
-                    "password": $("#password").val(),
-                    "_method": "PUT"
+                    "password": $("#userName").val(),
                 }
             });
         }
@@ -541,8 +547,8 @@ function initMenuTree() {
                 }
             };
             data.push({
-                comboId: common.menuPrefix.PREFIX_MENU + "0", name: "菜单+动作"
-                , open: true, nocheck: true
+                comboId: common.menuPrefix.PREFIX_MENU + "0",
+                name: "菜单+动作", open: true, nocheck: true
             });//nocheck 设置节点是否隐藏 checkbox / radio
             $.fn.zTree.init($("#menu"), setting, data);
         }
@@ -559,14 +565,14 @@ function menuRightClick(event, treeId, treeNode) {
     }
     rightClick(event, "menuMenu");
     $.fn.zTree.getZTreeObj(treeId).selectNode(treeNode);
-    $(".rmenuli").show();
+    $(".rMenuLi").show();
     //如果是动作节点，不显示[新增菜单]、[新增操作]
     if (treeNode.comboId.indexOf(common.menuPrefix.PREFIX_ACTION) == 0) {
-        $(".menuclass").hide();
+        $(".menuClass").hide();
     }
     //如果是根节点，不显示[修改]、[删除]
-    if (treeNode.comboId.indexOf(common.menuPrefix.PREFIX_ACTION + 0)) {
-        $(".menuclass").hide();
+    if (treeNode.comboId === common.menuPrefix.PREFIX_MENU + "0") {
+        $(".disabled").hide();
     }
 }
 
@@ -597,11 +603,11 @@ function initAddACtion() {
  */
 function modifyOfMenu() {
     var nodes = $.fn.zTree.getZTreeObj("menu").getSelectedNodes();
-    //如果选中的是动作节点
-    if (nodes[0].comboId.indexOf(common.menuPrefix.PREFIX_ACTION) === 0) {
+    if (nodes[0].comboId.indexOf(common.menuPrefix.PREFIX_ACTION) == 0) {
+        // 如果选中的是动作节点
         initModifyAction();
-    } else if (nodes[0].comboId.indexOf(common.menuPrefix.PREFIX_MENU) === 0) {
-        //如果选中的是菜单节点
+    } else if (nodes[0].comboId.indexOf(common.menuPrefix.PREFIX_MENU) == 0) {
+        // 如果选中的是菜单节点
         initModifyMenu();
     } else {
         common.showMessage("选中了错误的节点!");
@@ -779,6 +785,7 @@ function saveAction() {
  */
 function removeOfMenu() {
     var nodes = $.fn.zTree.getZTreeObj("menu").getSelectedNodes();
+    console.log(nodes);
     //如果选中的是动作节点
     if (nodes[0].comboId.indexOf(common.menuPrefix.PREFIX_ACTION) === 0) {
         initModifyAction();

@@ -21,6 +21,7 @@
 </head>
 <body style="background: #e1e9eb;">
 <input type="hidden" value="${basePath}" id="basePath"/>
+
 <!-- 用户维护页面 -->
 <div class="wishlistBox" id="userMaintain" style="display:none;left:450px;top:150px;">
     <div class="personRigTop persongBgimg" style="height:200px;width:480px;">
