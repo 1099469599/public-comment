@@ -21,18 +21,18 @@ common.showMessage = function (msg) {
 common.ajax = function (param) {
     var mergeParam = $.extend({
         timeout: 10000
-    }, param/*, {
-     complete: function (respose) {
-     var url = respose.getResponseHeader("url");
-     if (url) {
-     location.href = url;
-     } else {
-     if (param.complete && typeof param.complete == "function") {
-     param.complete();
-     }
-     }
-     }
-     }*/);
+    }, param, {
+        complete: function (response) {
+            var url = response.getResponseHeader("url");
+            if (url) {
+                location.href = url;
+            } else {
+                if(param.complete && typeof param.complete == "function") {
+                    param.complete();
+                }
+            }
+        }
+    });
     $.ajax(mergeParam);
 };
 

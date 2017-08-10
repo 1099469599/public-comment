@@ -12,7 +12,7 @@
             <result column="parent_id" property="parentId"/>
             <result column="order_num" property="orderNum"/>
         </collection>
-        <collection property="actionList" javaType="list" resultMap="com.cheng.dao.AdDao.ActionResultMap"/>
+        <collection property="actionList" javaType="list" resultMap="com.cheng.dao.ActionDao.ActionResultMap"/>
     </resultMap>
 
 
@@ -49,7 +49,7 @@
         DELETE FROM sys_group WHERE id=#{id}
     </delete>
 
-    <select id="selectMenuListById" resultType="group">
+    <select id="selectMenuListById" resultMap="GroupResultMap">
         SELECT g.id,g.name,m.id menu_id,m.name menu_name,m.url,m.parent_id,m.order_num,a.name action_name
         ,a.id action_id,a.url action_url,a.menu_id action_menu_id,a.method
         FROM sys_group g

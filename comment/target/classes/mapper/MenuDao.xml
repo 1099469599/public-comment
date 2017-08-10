@@ -7,8 +7,9 @@
         <result column="name" property="name"/>
         <result column="parent_id" property="parentId"/>
         <result column="order_num" property="orderNum"/>
-        <collection property="actionList" resultMap="com.cheng.dao.AdDao.ActionResultMap"/>
+        <collection property="actionList" resultMap="com.cheng.dao.ActionDao.ActionResultMap"/>
     </resultMap>
+
     <select id="selectWithAction" resultMap="MenuResultMap">
         SELECT m.id,m.name,m.url,m.parent_id,a.name action_name
         ,a.url action_url,a.menu_id action_menu_id,a.id action_id,a.method
@@ -21,4 +22,64 @@
         </where>
         ORDER BY m.order_num,CONVERT(a.name USING gbk) COLLATE gbk_chinese_ci
     </select>
+
+    <select id="select" resultType="Menu">
+        SELECT t.id,t.name,t.url,t.parent_id FROM sys_menu t
+        <where>
+            <if test="parentId != null">
+                AND t.parent_id = #{parentId}
+            </if>
+        </where>
+        ORDER BY t.order_num
+    </select>
+    <insert id="insert">
+        insert into sys_menu(name,url,parent_id,order_num)
+        select #{name},#{url},#{parentId}
+        ,ifnull((select max(order_num)+1 from sys_menu where parent_id=#{parentId}),1)
+    </insert>
+
+    <select id="selectById" resultType="Menu">
+        select id,name,url,parent_id,order_num from sys_menu t where t.id = #{_parameter}
+    </select>
+
+    <update id="update">
+        UPDATE sys_menu t
+        <set>
+            <if test="name != null">
+                t.name = #{name},
+            </if>
+            <if test="url != null">
+                t.url = #{url},
+            </if>
+            <if test="orderNum != null">
+                t.order_num = #{orderNum},
+            </if>
+            <if test="parentId != null">
+                t.parent_id = #{parentId},
+            </if>
+        </set>
+        WHERE t.id=#{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM sys_menu WHERE id=#{_parameter}
+    </delete>
+
+    <update id="updateOrderNumByParentId">
+        UPDATE sys_menu t SET t.order_num = t.order_num + 1 WHERE t.parent_id=#{_parameter}
+    </update>
+
+    <update id="updateOrderNumByIdInclude">
+        UPDATE sys_menu t SET t.order_num = t.order_num + 1
+        WHERE EXISTS (SELECT 1 FROM (
+        SELECT t1.parent_id,t1.order_num FROM sys_menu t1 WHERE t1.id = #{_parameter}
+        ) a WHERE t.parent_id=a.parent_id AND t.order_num >= a.order_num)
+    </update>
+
+    <update id="updateOrderNumById">
+        UPDATE sys_menu t SET t.order_num = t.order_num + 1
+        WHERE  EXISTS (SELECT 1 FROM (
+        SELECT t1.parent_id,t1.order_num FROM sys_menu t1 WHERE t1.id = #{_parameter}
+        ) a WHERE t.parent_id=a.parent_id AND t.order_num > a.order_num)
+    </update>
 </mapper>

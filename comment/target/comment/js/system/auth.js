@@ -332,7 +332,7 @@ function resetPassword() {
  */
 function assignGroup() {
     var userNodes = $.fn.zTree.getZTreeObj("user").getSelectedNodes();
-    var groupNodes = $.fn.zTree.getZTreeObj("group").getSelectedNodes();
+    var groupNodes = $.fn.zTree.getZTreeObj("group").getCheckedNodes();
     if (userNodes.length <= 0) {
         common.showMessage("未选中用户!");
         return;
@@ -341,7 +341,7 @@ function assignGroup() {
         common.showMessage("不能为根节点分配用户组!");
         return;
     }
-    if (userNodes.length >= 0) {
+    if (groupNodes.length <= 0) {
         common.showMessage("未选中用户组!");
         return;
     }
@@ -592,7 +592,7 @@ function initAddMenu() {
  */
 function initAddACtion() {
     mousedown();
-    clearMenu();
+    clearAction();
     $("#actionTitle").html("&nbsp;&nbsp;新增动作");
     $("#cover").show();
     $("#actionMaintain").show();
@@ -726,7 +726,7 @@ function saveMenu() {
                 data: {
                     "name": $("#menuName").val(),
                     "url": $("#url").val(),
-                    "parenId": parentId
+                    "parentId": parentId
                 }
             });
         }
@@ -745,7 +745,7 @@ function saveAction() {
                 success: function (data) {
                     if (data.code === common.pageCode.MODIFY_SUCCESS) {
                         initMenuTree();
-                        closeMenu();
+                        closeAction();
                     }
                     common.showMessage(data.msg);
                 },
@@ -765,7 +765,7 @@ function saveAction() {
                 success: function (data) {
                     if (data.code === common.pageCode.ADD_SUCCESS) {
                         initMenuTree();
-                        closeMenu();
+                        closeAction();
                     }
                     common.showMessage(data.msg);
                 },
@@ -773,7 +773,7 @@ function saveAction() {
                     "name": $("#actionName").val(),
                     "url": $("#actionUrl").val(),
                     "method": $("#httpMethod").val(),
-                    "parenId": parentId
+                    "menuId": parentId
                 }
             });
         }
@@ -785,13 +785,12 @@ function saveAction() {
  */
 function removeOfMenu() {
     var nodes = $.fn.zTree.getZTreeObj("menu").getSelectedNodes();
-    console.log(nodes);
     //如果选中的是动作节点
     if (nodes[0].comboId.indexOf(common.menuPrefix.PREFIX_ACTION) === 0) {
-        initModifyAction();
+        removeAction();
     } else if (nodes[0].comboId.indexOf(common.menuPrefix.PREFIX_MENU) === 0) {
         //如果选中的是菜单节点
-        initModifyMenu();
+        removeMenu();
     } else {
         common.showMessage("选中了错误的节点!");
     }
@@ -907,27 +906,27 @@ function selectGroup() {
  */
 function assignMenu() {
     var groupNodes = $.fn.zTree.getZTreeObj("group").getSelectedNodes();
-    var menuNodes = $.fn.zTree.getZTreeObj("menu").getSelectedNodes();
+    var menuNodes = $.fn.zTree.getZTreeObj("menu").getCheckedNodes();
     if (groupNodes.length <= 0) {
-        common.showMessage("未选中用户组!");
+        common.showMessage("未选中用户组！");
         return;
     }
     if (groupNodes[0].id == '0') {
-        common.showMessage("不能为根节点分配菜单!");
+        common.showMessage("不能为根节点分配菜单！");
         return;
     }
     var param = {};
     for (var i = 0; i < menuNodes.length; i++) {
-        //将勾选的菜单节点分为两组:因为在同一颗树上有两种节点：菜单节点，动作节点
+        // 将勾选的菜单节点分成两组：因为在同一颗树上有两种节点：菜单节点，动作菜点
         if (menuNodes[i].comboId.indexOf(common.menuPrefix.PREFIX_MENU) == 0) {
-            //注意：这里如果用i来做下标，将会出现跳号，actionIdList也一样会跳号（因为在单次循环中，i不是单属于某一种节点）：
-            //要么修改这里，让下标是从0开始顺序递增：用两个变量来分别记录menuIdList、actionIdList的下标（可以自己试改一下）
-            //要么修改后台，这里选择修改后台
+            // 注意:这里如果用i来做下标，将会出现跳号，actionIdList也一样会跳号(因为在单次循环中，i不是单属于某一种节点)：
+            // 要么修改这里，让下标是从0开始顺序递增：用两个变量来分别记录menuIdList、actionIdList的下标（可以自己试改一下）
+            // 要么修改后台，我这里是修改后台
             param["menuIdList[" + i + "]"] = menuNodes[i].id;
         } else if (menuNodes[i].comboId.indexOf(common.menuPrefix.PREFIX_ACTION) == 0) {
             param["actionIdList[" + i + "]"] = menuNodes[i].id;
         } else {
-            common.showMessage("选中了错误的节点!");
+            common.showMessage("选中了错误的节点！");
         }
     }
     common.ajax({

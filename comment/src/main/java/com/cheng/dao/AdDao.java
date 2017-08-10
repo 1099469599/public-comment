@@ -1,7 +1,6 @@
 package com.cheng.dao;
 
 import com.cheng.bean.Ad;
-import com.cheng.dto.AdDto;
 
 import java.util.List;
 
@@ -9,45 +8,40 @@ import java.util.List;
  * 广告模块持久层接口
  * Created by cheng on 2017/7/22.
  */
-
 public interface AdDao {
+
     /**
-     * 新增广告
-     *
-     * @param ad 广告实体
-     * @return 新增了几条数目
+     * 新增
+     * @param ad 广告表对象
+     * @return 影响行数
      */
     int insert(Ad ad);
 
     /**
-     * 根据查询条件分页查询广告对象
-     *
+     * 根据查询条件分页查询
      * @param ad 查询条件：包括广告表的查询字段和分页信息
      * @return 广告列表
      */
     List<Ad> selectByPage(Ad ad);
 
     /**
-     * 根据主键删除
-     *
-     * @param id
-     * @return true：删除成功;false：删除失败
-     */
-    public boolean delete(Long id);
-
-    /**
      * 根据主键查询广告对象
-     *
-     * @param id
+     * @param id 主键值
      * @return 广告对象
      */
     Ad selectById(Long id);
 
     /**
      * 根据主键修改
-     *
-     * @param ad 代修改的广告对象
-     * @return 影响的行数
+     * @param ad 待修改的广告对象
+     * @return 影响行数
      */
     int update(Ad ad);
+
+    /**
+     * 根据主键删除
+     * @param id 主键
+     * @return 影响行数
+     */
+    boolean delete(Long id);
 }

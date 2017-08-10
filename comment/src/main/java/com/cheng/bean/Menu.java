@@ -17,6 +17,12 @@ public class Menu {
      * 菜单名
      */
     private String name;
+
+    /**
+     * url地址
+     */
+    private String url;
+
     /**
      * 父菜单id
      */
@@ -68,5 +74,13 @@ public class Menu {
 
     public void setActionList(List<Action> actionList) {
         this.actionList = actionList;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

@@ -21,4 +21,44 @@ public class MenuDaoImpl implements MenuDao {
     public List<Menu> selectWithAction(Menu menu) {
         return menuDao.selectWithAction(menu);
     }
+
+    @Override
+    public List<Menu> select(Menu menu) {
+        return menuDao.select(menu);
+    }
+
+    @Override
+    public int insert(Menu menu) {
+        return menuDao.insert(menu);
+    }
+
+    @Override
+    public Menu selectById(Long id) {
+        return menuDao.selectById(id);
+    }
+
+    @Override
+    public int update(Menu menu) {
+        return menuDao.update(menu);
+    }
+
+    @Override
+    public int delete(Long id) {
+        return menuDao.delete(id);
+    }
+
+    @Override
+    public int updateOrderNumByParentId(Long parentId) {
+        return menuDao.updateOrderNumByParentId(parentId);
+    }
+
+    @Override
+    public int updateOrderNumByIdInclude(Long id) {
+        return menuDao.updateOrderNumByIdInclude(id);
+    }
+
+    @Override
+    public int updateOrderNumById(Long id) {
+        return menuDao.updateOrderNumById(id);
+    }
 }

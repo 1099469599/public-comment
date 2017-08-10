@@ -25,7 +25,14 @@ public class SessionInterceptor implements HandlerInterceptor {
         if (httpServletRequest.getSession().getAttribute(SessionKeyConst.USER_INFO) != null) {
             return true;
         }
-        httpServletRequest.getRequestDispatcher("/login/sessionTimeOut").forward(httpServletRequest,httpServletResponse);
+        //针对ajax请求处理
+        if (httpServletRequest.getHeader("x-requested-with") != null) {
+            String basePath = httpServletRequest.getScheme() + "://" + httpServletRequest.getServerName()
+                    + ":" + httpServletRequest.getServerPort() + httpServletRequest.getContextPath();
+        } else {
+            httpServletRequest.getRequestDispatcher("/login/sessionTimeOut").forward(httpServletRequest,httpServletResponse);
+        }
+        httpServletRequest.getRequestDispatcher("/login/sessionTimeOut").forward(httpServletRequest, httpServletResponse);
         return false;
     }
 

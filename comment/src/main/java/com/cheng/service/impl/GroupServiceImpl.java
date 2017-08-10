@@ -102,7 +102,7 @@ public class GroupServiceImpl implements GroupService {
     public boolean assignMenu(GroupDto groupDto) {
         groupMenuDao.deleteByGroupId(groupDto.getId());
         groupActionDao.deleteByGroupId(groupDto.getId());
-        //保存为用户组分配的菜单
+        // 保存为用户组分配的菜单
         if (groupDto.getMenuIdList() != null && groupDto.getMenuIdList().size() > 0) {
             List<GroupMenu> list = new ArrayList<>();
             for (Long menuId : groupDto.getMenuIdList()) {
@@ -115,7 +115,7 @@ public class GroupServiceImpl implements GroupService {
             }
             groupMenuDao.insertBatch(list);
         }
-        //保存为用户组分配的动作
+        // 保存为用户组分配的动作
         if (groupDto.getActionIdList() != null && groupDto.getActionIdList().size() > 0) {
             List<GroupAction> list = new ArrayList<>();
             for (Long actionId : groupDto.getActionIdList()) {
@@ -123,6 +123,7 @@ public class GroupServiceImpl implements GroupService {
                     GroupAction groupAction = new GroupAction();
                     groupAction.setGroupId(groupDto.getId());
                     groupAction.setActionId(actionId);
+                    list.add(groupAction);
                 }
             }
             groupActionDao.insertBatch(list);

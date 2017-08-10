@@ -2,8 +2,10 @@ package com.cheng.controller.system;
 
 import com.cheng.constant.PageCodeEnum;
 import com.cheng.constant.SessionKeyConst;
+import com.cheng.dto.GroupDto;
 import com.cheng.dto.UserDto;
 import com.cheng.service.UserService;
+import com.cheng.service.impl.GroupServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +25,12 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private GroupServiceImpl groupService;
+
+    @Autowired
+    private HttpSession session;
+
     /**
      * 登录页面
      */
@@ -34,10 +42,17 @@ public class LoginController {
     /**
      * session超时
      */
-    @RequestMapping("sessionTimeOut")
+    @RequestMapping("/sessionTimeOut")
     public String sessionTimeOut(Model model) {
         model.addAttribute(PageCodeEnum.KEY, PageCodeEnum.SESSION_TIMEOUT);
-        return "/system/login";
+        return "/system/sessionTimeOut";
+    }
+
+    @RequestMapping("/noAuth")
+    public String noAuth(Model model) {
+        model.addAttribute(PageCodeEnum.KEY, PageCodeEnum.NO_AUTH);
+        session.invalidate();
+        return "/system/error";
     }
 
     /**
@@ -47,6 +62,9 @@ public class LoginController {
     public String validate(UserDto userDto, RedirectAttributes attr, HttpSession session) {
         if (userService.validate(userDto)) {
             session.setAttribute(SessionKeyConst.USER_INFO, userDto);
+            GroupDto groupDto = groupService.getByIdWithMenuAction(userDto.getGroupId());
+            session.setAttribute(SessionKeyConst.MENU_INFO, groupDto);
+            session.setAttribute(SessionKeyConst.ACTION_INFO, groupDto.getActionDtoList());
             return "redirect:/index";
         }
         attr.addFlashAttribute(PageCodeEnum.KEY, PageCodeEnum.LOGIN_FAIL);
