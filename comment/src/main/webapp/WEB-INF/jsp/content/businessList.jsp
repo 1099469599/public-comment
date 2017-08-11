@@ -16,7 +16,7 @@
     <script type="text/javascript" src="${basePath}/js/content/businessList.js"></script>
 </head>
 <body style="background: #e1e9eb;">
-<form action="${basePath}/business/search" id="mainForm" method="post">
+<form action="${basePath}/businesses/search" id="mainForm" method="post">
     <input type="hidden" id="_method" name="_method"/>
     <input type="hidden" id="message" value="${pageCode.msg}"/>
     <input type="hidden" id="basePath" value="${basePath}"/>
@@ -33,9 +33,9 @@
                         <input name="title" id="title" value="${searchParam.title}" class="allInput" type="text"/>
                     </td>
                     <td style="text-align: right;" width="150">
-                        <input class="tabSub" value="查询" onclick="search('1');" type="button"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <%--<t:auth url="/business/addPage" method="GET">--%>
-                        <input class="tabSub" value="添加" onclick="location.href='${basePath}/business/addInit'"
+                        <input class="tabSub" value="查询" onclick="search('1');" type="button"/>
+                        &nbsp;&nbsp;&nbsp;<%--<t:auth url="/businesses/addPage" method="GET">--%>
+                        <input class="tabSub" value="添加" onclick="location.href='${basePath}/businesses/addInit'"
                                type="button"/>
                         <%-- </t:auth>--%>
                     </td>

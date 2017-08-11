@@ -38,7 +38,7 @@ function clickSecondMenu(element, path) {
 var menuMap = {};
 
 $(function () {
-    //TODO
+    //菜单初始化
     common.ajax({
         url: $("#basePath").val() + "/session/menus",
         success: function (data) {
@@ -56,14 +56,14 @@ $(function () {
 });
 
 /**
- * 初始化菜单
+ * 初始化根  菜单
  */
 function initMenu() {
     var menuList = menuMap[0];
     $("#menuDiv").html("");
     $.each(menuList, function (i, value) {
-        $("#menuDiv").append("<li onclick='clickMenu(this," + value.id + ")'>" +
-            "<a><span>" + value.name + "</span></a></li>");
+        $("#menuDiv").append("<li onclick='clickMenu(this," + value.id
+            + ")'><a><span>" + value.name + "</span></a></li>");
     });
 }
 
@@ -74,7 +74,8 @@ function initSubMenu(parentId) {
     var menuList = menuMap[parentId];
     $("#subMenuDiv").html("");
     $.each(menuList, function (i, value) {
-        $("#subMenuDiv").append("<h3 onclick=\"clickSubMenu(this,'" + value.url + "')\"><a>" + value.name + "</a></h3>")
+        $("#subMenuDiv").append("<h3 onclick=\"clickSubMenu(this,'" + value.url
+            + "')\"><a>" + value.name + "</a></h3>");
     });
 }
 
@@ -98,8 +99,8 @@ function clickSubMenu(element, path) {
     //将其他有[选中模式]的节点的样式清空
     $("#subMenuDiv").find(".on").attr("class", "");
     //将当前单击的节点置为[选中模式]
-    $(element).children.attr("class", "on");
-    //将当前页面跳转到指定的地址(iframe)
+    $(element).children().attr("class", "on");
+    //按指定地址加载主页面(iframe)
     $("#mainPage").attr("src", $("#basePath").val() + path);
 }
 
@@ -109,7 +110,7 @@ function clickSubMenu(element, path) {
 function openAddDiv() {
     $("#mengban").css("visibility", "visible");
     $(".wishlistBox").show();
-    $(".wishlistBox").find(".persongRightTit");
+    $(".wishlistBox").find(".persongRightTit").html("&nbsp;&nbsp;修改密码");
     $("#submitval").show();
 }
 

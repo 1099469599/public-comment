@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Created by cheng on 2017/7/22.
  */
 @Controller
-@RequestMapping("/business")
+@RequestMapping("/businesses")
 public class BusinessController {
 
     @Autowired
@@ -84,7 +84,7 @@ public class BusinessController {
         } else {
             model.addAttribute(PageCodeEnum.KEY, PageCodeEnum.REMOVE_FAIL);
         }
-        return "/content/businessList";
+        return "redirect:/businesses";
     }
 
     /**

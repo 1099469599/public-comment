@@ -10,6 +10,7 @@
     <script type="text/javascript">
         $(function () {
             common.showMessage("${pageCode.msg}");
+            //获取顶层window
             var topWindow = window;
             while (topWindow.parent != topWindow) {
                 topWindow = topWindow.parent;

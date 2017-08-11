@@ -17,7 +17,7 @@
     <script type="text/javascript" src="${basePath}/js/content/businessModify.js"></script>
 </head>
 <body style="background: #e1e9eb;">
-<form id="mainForm" method="post" action="${basePath}/business/${modifyObj.id}" enctype="multipart/form-data">
+<form id="mainForm" method="post" action="${basePath}/businesses/${modifyObj.id}" enctype="multipart/form-data">
     <input type="hidden" id="message" value="${pageCode.msg}"/>
     <input type="hidden" name="imgFileName" value="${modifyObj.imgFileName}"/>
     <input type="hidden" id="basePath" value="${basePath}"/>

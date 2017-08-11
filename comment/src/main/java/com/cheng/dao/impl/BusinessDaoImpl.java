@@ -18,47 +18,47 @@ import java.util.Map;
 public class BusinessDaoImpl implements BusinessDao {
 
     @Autowired
-    private BusinessDao businessesDao;
+    private BusinessDao businessDao;
 
     @Override
     public List<Business> selectByPage(Business business) {
         PageHelper.startPage(business.getPage().getPageNum(), business.getPage().getPageSize());
-        return businessesDao.selectByPage(business);
+        return businessDao.selectByPage(business);
     }
 
     @Override
     public Business selectById(Long id) {
-        return businessesDao.selectById(id);
+        return businessDao.selectById(id);
     }
 
     @Override
     public boolean delete(Long id) {
-        return businessesDao.delete(id);
+        return businessDao.delete(id);
     }
 
     @Override
     public int update(Business business) {
-        return businessesDao.update(business);
+        return businessDao.update(business);
     }
 
     @Override
     public boolean insert(Business business) {
-        return businessesDao.insert(business);
+        return businessDao.insert(business);
     }
 
     @Override
     public List<Business> selectLikeByPage(Business business) {
         PageHelper.startPage(business.getPage().getPageNum(), business.getPage().getPageSize());
-        return businessesDao.selectLikeByPage(business);
+        return businessDao.selectLikeByPage(business);
     }
 
     @Override
     public void updateNumber(Map<String, Date> map) {
-        businessesDao.updateNumber(map);
+        businessDao.updateNumber(map);
     }
 
     @Override
     public void updateStar(Map<String, Date> map) {
-        businessesDao.updateStar(map);
+        businessDao.updateStar(map);
     }
 }

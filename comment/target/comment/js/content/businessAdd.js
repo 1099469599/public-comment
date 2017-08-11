@@ -37,5 +37,5 @@ function add() {
  * 返回列表
  */
 function goback() {
-    location.href = $("#basePath").val() + "/business";
+    location.href = $("#basePath").val() + "/businesses";
 }

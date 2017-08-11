@@ -3,9 +3,10 @@ package com.cheng.controller.system;
 import com.cheng.constant.SessionKeyConst;
 import com.cheng.dto.MenuDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
  * Created by cheng on 2017/7/22.
  */
 @RequestMapping("/session")
-@RestController
+@Controller
 public class SessionController {
 
     @Autowired
@@ -23,6 +24,7 @@ public class SessionController {
 
     @SuppressWarnings("unchecked")
     @RequestMapping(value = "/menus", method = RequestMethod.GET)
+    @ResponseBody
     public List<MenuDto> getUserMenuList(MenuDto menuDto) {
         return (List<MenuDto>) session.getAttribute(SessionKeyConst.MENU_INFO);
     }

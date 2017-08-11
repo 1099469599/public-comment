@@ -63,7 +63,7 @@ public class LoginController {
         if (userService.validate(userDto)) {
             session.setAttribute(SessionKeyConst.USER_INFO, userDto);
             GroupDto groupDto = groupService.getByIdWithMenuAction(userDto.getGroupId());
-            session.setAttribute(SessionKeyConst.MENU_INFO, groupDto);
+            session.setAttribute(SessionKeyConst.MENU_INFO, groupDto.getMenuDtoList());
             session.setAttribute(SessionKeyConst.ACTION_INFO, groupDto.getActionDtoList());
             return "redirect:/index";
         }

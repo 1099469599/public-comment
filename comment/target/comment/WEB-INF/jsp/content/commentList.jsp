@@ -19,7 +19,7 @@
 
 </head>
 <body style="background: #e1e9eb;">
-<form action="${basePath}/comment/search" id="mainForm" method="post">
+<form action="${basePath}/comments/search" id="mainForm" method="post">
     <input type="hidden" id="id" name="id"/>
     <input type="hidden" id="basePath" value="${basePath}"/>
     <input type="hidden" id="pageNum" name="page.pageNum"/>

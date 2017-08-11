@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * 评论模块控制层
  * Created by cheng on 2017/7/22.
  */
-@RequestMapping("/comment")
+@RequestMapping("/comments")
 @Controller
 public class CommentController {
 

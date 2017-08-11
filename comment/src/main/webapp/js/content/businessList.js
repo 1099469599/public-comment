@@ -21,7 +21,7 @@ function search(pageNum) {
 function removeBusiness(id) {
     if (confirm("确定要删除这条广告吗? ")) {
         $("#_method").val("delete");
-        $("#mainForm").attr("action", $("#basePath").val() + "/business/" + id);
+        $("#mainForm").attr("action", $("#basePath").val() + "/businesses/" + id);
         $("#mainForm").submit();
     }
 }
@@ -30,5 +30,5 @@ function removeBusiness(id) {
  * 初始化修改页
  */
 function modifyInit(id) {
-    window.location.href = $("#basePath").val() + "/business/" + id;
+    window.location.href = $("#basePath").val() + "/businesses/" + id;
 }
